@@ -162,13 +162,48 @@ export function Guidance() {
 }
 
 export function InstaStrip() {
+  const reels = [
+    'DKv6xndhtVg',
+    'DeJyFXKJOJT',
+    'Dc8uhPpSU60',
+    'Dbm01Kspt2l',
+    'DawQuANzQSZ',
+    'DZLOlhEBTIO',
+  ];
+
   return (
     <div className="insta stagger reveal">
-      {[1, 2, 3, 4, 5, 6].map((n) => (
-        <a key={n} href={BRAND.instagram} target="_blank" rel="noreferrer" className="card itile" aria-label="Open Instagram">
-          <Img src={`/images/insta-${n}.jpg`} alt="" label="@trainxshiv" /><span className="ig"><Instagram size={20} /></span>
-        </a>
+      {reels.map((reel) => (
+        <InstagramReel key={reel} reel={reel} />
       ))}
+    </div>
+  );
+}
+
+function InstagramReel({ reel }) {
+  const [loaded, setLoaded] = useState(false);
+  const reelUrl = `https://www.instagram.com/reel/${reel}/`;
+
+  return (
+    <div className="card itile">
+      <div className="itile-video">
+        {!loaded && (
+          <div className="insta-loader" role="status" aria-label="Loading Instagram video">
+            <span />
+          </div>
+        )}
+        <iframe
+          src={`${reelUrl}embed/?autoplay=1&muted=1`}
+          title={`TrainXShiv Instagram reel ${reel}`}
+          loading="lazy"
+          allow="autoplay; encrypted-media; picture-in-picture"
+          allowFullScreen
+          onLoad={() => setLoaded(true)}
+        />
+      </div>
+      <a className="insta-open-link" href={reelUrl} target="_blank" rel="noreferrer">
+        <Instagram size={16} /> Open on Instagram
+      </a>
     </div>
   );
 }

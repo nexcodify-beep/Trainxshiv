@@ -44,11 +44,11 @@ export const PAID_DIETS = [
 
 export const HEAD_TRAINER = {
   id: 1,
-  name: 'Shivan',
+  name: 'Shivam',
   badge: 'HEAD TRAINER & FOUNDER',
   role: 'HEAD TRAINER & FOUNDER',
   tags: ['Head Coach', 'Founder', 'Master Trainer'],
-  img: '/images/trainers/shivan_hero.png',
+  img: '/foundercoach/shivamsingh.png',
   featured: true,
   bio: 'Helping people build a stronger, healthier and more confident version of themselves.',
   socials: {
@@ -67,7 +67,7 @@ export const TEAM_TRAINERS = [
     badgeIcon: 'Dumbbell',
     role: 'STRENGTH & CONDITIONING',
     tags: ['Strength Training', 'Conditioning', 'Endurance'],
-    img: '/images/trainers/rahul.png',
+    img: 'https://randomuser.me/api/portraits/men/32.jpg',
     bio: 'Build strength, improve endurance and become your best self.',
     socials: {
       instagram: 'https://www.instagram.com/trainxshiv/',
@@ -82,7 +82,7 @@ export const TEAM_TRAINERS = [
     badgeIcon: 'User',
     role: 'WEIGHT LOSS & WOMEN FITNESS',
     tags: ['Weight Loss', 'Women Fitness', 'Body Toning'],
-    img: '/images/trainers/priya.png',
+    img: 'https://randomuser.me/api/portraits/women/44.jpg',
     bio: "Specialized in weight loss, toning and women's fitness programs.",
     socials: {
       instagram: 'https://www.instagram.com/trainxshiv/',
@@ -97,7 +97,7 @@ export const TEAM_TRAINERS = [
     badgeIcon: 'Utensils',
     role: 'NUTRITION & DIET PLANS',
     tags: ['Diet Planning', 'Nutrition', 'Meal Prep'],
-    img: '/images/trainers/aman.png',
+    img: 'https://randomuser.me/api/portraits/men/75.jpg',
     bio: 'Customized diet plans for a healthier and stronger you.',
     socials: {
       instagram: 'https://www.instagram.com/trainxshiv/',
