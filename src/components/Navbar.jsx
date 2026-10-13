@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { Link, NavLink, useLocation } from 'react-router-dom';
-import { Menu, X, Phone, ArrowRight } from 'lucide-react';
+import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
+import { Menu, X, Phone, ArrowRight, ArrowLeft } from 'lucide-react';
 import { BRAND, NAV } from '../data';
 import { useModal } from '../context';
 
@@ -9,6 +9,9 @@ export default function Navbar() {
   const [menu, setMenu] = useState(false);
   const { open } = useModal();
   const loc = useLocation();
+  const navigate = useNavigate();
+  const isHome = loc.pathname === '/';
+
   useEffect(() => {
     const f = () => setScrolled(window.scrollY > 20);
     f();
@@ -20,9 +23,23 @@ export default function Navbar() {
   return (
     <header className={`nav ${scrolled ? 'scrolled' : ''}`}>
       <div className="container nav-in">
-        <Link to="/" className="brand" aria-label="TrainXShiv home">
-          <img src="/logo.png" alt="TrainXShiv logo" />
-        </Link>
+        <div className="nav-brand-group">
+          {!isHome && (
+            <button
+              type="button"
+              className="mob-back-btn"
+              onClick={() => navigate(-1)}
+              aria-label="Go Back"
+              title="Go Back"
+            >
+              <ArrowLeft size={18} />
+              <span>Back</span>
+            </button>
+          )}
+          <Link to="/" className="brand" aria-label="TrainXShiv home">
+            <img src="/logo.png" alt="TrainXShiv logo" />
+          </Link>
+        </div>
         <nav className={`links ${menu ? 'open' : ''}`}>
           {NAV.map(([n, to]) => (
             <NavLink key={to} to={to} end={to === '/'} className={({ isActive }) => (isActive ? 'active' : '')}>{n}</NavLink>

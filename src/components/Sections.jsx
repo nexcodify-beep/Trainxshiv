@@ -6,14 +6,14 @@ import { useModal } from '../context';
 import { Icon, Img, Counter, SectionHead, Stars } from './ui';
 import BeforeAfter from './BeforeAfter';
 
-export function Hero() {
+export function Hero({ className = '', isFooterHero = false }) {
   const { open } = useModal();
   return (
-    <section className="hero">
+    <section className={`hero ${className} ${isFooterHero ? 'hero-footer-style' : ''}`}>
       <div className="blob b1" /><div className="blob b2" />
       <div className="container hero-grid">
         <div className="hero-copy">
-          <span className="pill"><Sparkles size={13} /> Personalized fitness coaching</span>
+          <span className="pill"><Sparkles size={13} /> {isFooterHero ? 'Start With Coach Shivam' : 'Personalized fitness coaching'}</span>
           <h1><span className="hero-line">Transform Your Body.</span><br /><em className="hero-line">Transform Your Life.</em></h1>
           <p>At TrainXShiv, we help you build a stronger, healthier and more confident YOU with personalized training, nutrition and complete lifestyle guidance.</p>
           <div className="row wrap">
@@ -196,6 +196,7 @@ function InstagramReel({ reel }) {
           src={`${reelUrl}embed/?autoplay=1&muted=1`}
           title={`TrainXShiv Instagram reel ${reel}`}
           loading="lazy"
+          scrolling="no"
           allow="autoplay; encrypted-media; picture-in-picture"
           allowFullScreen
           onLoad={() => setLoaded(true)}

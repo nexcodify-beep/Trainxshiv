@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { ArrowRight, RotateCcw, Wand2 } from 'lucide-react';
 import { PROGRAMS, PLANS } from '../data';
-import { ProgramGrid, CTA } from '../components/Sections';
+import { ProgramGrid, Guidance, CTA } from '../components/Sections';
 import { SectionHead, Icon, inr } from '../components/ui';
 import { useModal } from '../context';
 
 const QUIZ = [
-  { q: 'What is your primary goal?', o: [['fat-loss', 'Lose Fat'], ['weight-gain', 'Gain Weight'], ['muscle', 'Build Muscle'], ['toning', 'Get Fitter']] },
+  { q: 'What is your primary goal?', o: [['online', 'Online Coaching (All Goals)'], ['muscle', 'Build Muscle'], ['fat-loss', 'Lose Fat']] },
   { q: 'How experienced are you?', o: [['b', 'Beginner'], ['i', 'Intermediate'], ['a', 'Advanced']] },
   { q: 'Where will you train?', o: [['gym', 'Gym'], ['home', 'Home'], ['both', 'Both']] },
   { q: 'How do you want support?', o: [['online', 'Online chat & check-ins'], ['personal', 'One-to-one coaching']] },
@@ -18,7 +18,7 @@ function Quiz() {
   const [ans, setAns] = useState([]);
   const pick = (v) => { setAns([...ans, v]); setStep(step + 1); };
   const done = step >= QUIZ.length;
-  const prog = done ? PROGRAMS.find((p) => p.id === (ans[3] === 'personal' && ans[0] === 'toning' ? 'personal' : ans[0])) : null;
+  const prog = done ? (PROGRAMS.find((p) => p.id === ans[0]) || PROGRAMS[0]) : null;
   const plan = ans[3] === 'personal' ? PLANS[1] : PLANS[0];
   return (
     <section className="section quiz-sec">
@@ -77,6 +77,12 @@ export default function Programs() {
               <div className="card feat-card" key={t}><span className="d-ico"><Icon name={i} size={22} /></span><h4>{t}</h4><p className="muted small">{d}</p></div>
             ))}
           </div>
+        </div>
+      </section>
+      <section className="section alt">
+        <div className="container">
+          <SectionHead eyebrow="Complete support" title="Workout & Diet Guidance" sub="Clear roadmap and nutrition for your fitness transformation." />
+          <Guidance />
         </div>
       </section>
       <CTA />

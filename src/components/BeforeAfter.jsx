@@ -12,11 +12,7 @@ export default function BeforeAfter({ t, dark }) {
       <div className="ba-stage">
         {isSingleCard ? (
           <>
-            <img
-              src={singleSrc}
-              className="ba-img ba-img-contain"
-              alt={`${t.name} Transformation Before & After`}
-            />
+            <img src={singleSrc} className="ba-img ba-img-contain" alt={`${t.name} Transformation`} />
             <span className="ba-tag l">Before</span>
             <span className="ba-tag r">After</span>
           </>
@@ -29,15 +25,7 @@ export default function BeforeAfter({ t, dark }) {
             <div className="ba-line" style={{ left: pos + '%' }}>
               <span><MoveHorizontal size={16} /></span>
             </div>
-            <input
-              type="range"
-              min="0"
-              max="100"
-              value={pos}
-              onChange={(e) => setPos(+e.target.value)}
-              className="ba-range"
-              aria-label={`Compare ${t.name} before and after`}
-            />
+            <input type="range" min="0" max="100" value={pos} onChange={(e) => setPos(+e.target.value)} className="ba-range" aria-label={`Compare ${t.name}`} />
             <span className="ba-tag l">Before</span>
             <span className="ba-tag r">After</span>
           </>

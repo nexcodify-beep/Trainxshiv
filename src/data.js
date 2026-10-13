@@ -20,13 +20,9 @@ export const NAV = [
 ];
 
 export const PROGRAMS = [
-  { id: 'fat-loss', cat: 'Fat Loss', icon: 'Flame', title: 'Fat Loss Program', tag: 'Burn fat, get lean and build sustainable healthy habits.', weeks: '8–24 Weeks', level: 'All Levels', img: '/images/fat-loss.jpg', from: 1999, features: ['Customized workout plan', 'Personalized diet plan', 'Progress tracking', 'Expert guidance'] },
-  { id: 'weight-gain', cat: 'Weight Gain', icon: 'Dumbbell', title: 'Weight Gain Program', tag: 'Gain healthy weight with structured training and nutrition.', weeks: '12–24 Weeks', level: 'Beginner–Advanced', img: '/images/weight-gain.jpg', from: 1999, features: ['Customized workout plan', 'Personalized diet plan', 'Progress tracking', 'Expert guidance'] },
-  { id: 'muscle', cat: 'Muscle Building', icon: 'Trophy', title: 'Muscle Building Program', tag: 'Build lean muscle, strength and a stronger physique.', weeks: '12+ Weeks', level: 'Intermediate+', img: '/images/muscle.jpg', from: 2499, features: ['Customized workout plan', 'Personalized diet plan', 'Progress tracking', 'Expert guidance'] },
-  { id: 'toning', cat: 'Fitness & Toning', icon: 'Activity', title: 'Fitness & Toning', tag: 'Improve overall fitness, shape your body and get stronger.', weeks: '8–24 Weeks', level: 'All Levels', img: '/images/toning.jpg', from: 1999, features: ['Customized workout plan', 'Personalized diet plan', 'Progress tracking', 'Expert guidance'] },
-  { id: 'personal', cat: 'Personal Training', icon: 'Users', title: 'Personal Training', tag: 'One-to-one coaching with complete guidance.', weeks: 'Flexible Duration', level: 'All Levels', img: '/images/personal.jpg', from: 4999, features: ['Customized workout plan', 'Personalized diet plan', 'Progress tracking', 'Expert guidance'] },
-  { id: 'online', cat: 'Online Training', icon: 'Laptop', title: 'Online Coaching', tag: 'Train from anywhere with expert guidance and weekly check-ins.', weeks: 'Flexible', level: 'All Levels', img: '/images/online.jpg', from: 1999, features: ['Workout plan in your app', 'Chat support', 'Weekly check-ins', 'Video tutorials'] },
-  { id: 'diet', cat: 'Diet & Nutrition', icon: 'Utensils', title: 'Diet & Nutrition Plan', tag: 'Personalized meal plans for your goals and lifestyle.', weeks: '4–24 Weeks', level: 'All Levels', img: '/images/diet.jpg', from: 999, features: ['Customized diet plan', 'Vegetarian & non-vegetarian', 'Easy & sustainable diet', 'Nutrition tracking'] },
+  { id: 'online', cat: 'Online Coaching', icon: 'Laptop', title: 'Online Coaching', tag: 'Train from anywhere with expert 1-on-1 guidance and weekly check-ins.', weeks: 'Flexible', level: 'All Levels', img: '/images/online.jpg', from: 1999, features: ['Personalized workout & diet plan', 'Weekly check-ins & adjustments', 'Daily WhatsApp chat support', 'Video form correction'] },
+  { id: 'muscle', cat: 'Muscle Building', icon: 'Trophy', title: 'Muscle Building Program', tag: 'Build solid lean muscle, raw strength and aesthetic shape naturally.', weeks: '12+ Weeks', level: 'Beginner–Advanced', img: '/images/muscle.jpg', from: 2499, features: ['Hypertrophy progressive training', 'High-protein Indian meal plan', 'Form & biomechanics guidance', 'Strength milestone tracking'] },
+  { id: 'fat-loss', cat: 'Fat Loss', icon: 'Flame', title: 'Fat Loss Program', tag: 'Burn stubborn fat, get lean and build sustainable lifelong habits.', weeks: '8–24 Weeks', level: 'All Levels', img: '/images/fat-loss.jpg', from: 1999, features: ['Targeted fat-burn workout routine', 'Flexible Indian calorie-deficit diet', 'Weekly body recomposition checks', 'Metabolic recovery guidance'] },
 ];
 
 export const PLANS = [
@@ -111,15 +107,11 @@ export const TRAINERS = [HEAD_TRAINER, ...TEAM_TRAINERS];
 
 // Real transformations with genuine Before & After photos
 export const TRANSFORMS = [
-  { id: 1, name: 'Amit Kumar', goal: 'Fat Loss & Abs', type: 'fat', result: '-12 KG', period: 'in 4 Months', image: '/images/transformations/amit_ba.png' },
-  { id: 2, name: 'Sneha Verma', goal: 'Fat Loss & Inch Loss', type: 'fat', result: '-10 KG', period: 'in 3 Months', image: '/images/transformations/ba_1.png' },
-  { id: 3, name: 'Rahul Mehta', goal: 'Muscle Building', type: 'muscle', result: '+8 KG', period: 'in 5 Months', image: '/images/transformations/ba_2.png' },
-  { id: 4, name: 'Vikas Yadav', goal: 'Fat Loss & Toning', type: 'fat', result: '-14 KG', period: 'in 6 Months', image: '/images/transformations/ba_3.png' },
-  { id: 5, name: 'Arjun Singh', goal: 'Lean Bulking', type: 'muscle', result: '+9 KG', period: 'in 5 Months', image: '/images/transformations/ba_4.jpg' },
-  { id: 6, name: 'Karan Gupta', goal: 'Weight Loss & Definition', type: 'fat', result: '-11 KG', period: 'in 4 Months', image: '/images/transformations/ba_5.jpg' },
-  { id: 7, name: 'Pooja Sharma', goal: 'Postpartum Fat Loss', type: 'fat', result: '-13 KG', period: 'in 5 Months', image: '/images/transformations/ba_6.jpg' },
-  { id: 8, name: 'Rohan Deshmukh', goal: 'Athletic Conditioning', type: 'muscle', result: '+7 KG', period: 'in 4 Months', image: '/images/transformations/ba_7.jpg' },
-  { id: 9, name: 'Deepak Joshi', goal: 'Body Recomposition', type: 'gain', result: '+8 KG', period: 'in 5 Months', image: '/images/transformations/ba_8.png' },
+  { id: 1, name: 'Amit Kumar', goal: 'Fat Loss & Abs', type: 'fat', result: '-12 KG', period: 'in 4 Months', image: '/images/transformations/ba7.png' },
+  { id: 2, name: 'Sneha Verma', goal: 'Fat Loss & Inch Loss', type: 'fat', result: '-10 KG', period: 'in 3 Months', image: '/images/transformations/ba8.png' },
+  { id: 3, name: 'Rahul Mehta', goal: 'Muscle Building', type: 'muscle', result: '+8 KG', period: 'in 5 Months', image: '/images/transformations/b9.png' },
+  { id: 4, name: 'Vikas Yadav', goal: 'Fat Loss & Toning', type: 'fat', result: '-14 KG', period: 'in 6 Months', image: '/images/transformations/b10.png' },
+  { id: 5, name: 'Arjun Singh', goal: 'Body Recomposition', type: 'gain', result: '+9 KG', period: 'in 5 Months', image: '/images/transformations/ba_2.png' },
 ];
 
 // Video reviews

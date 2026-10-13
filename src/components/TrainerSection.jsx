@@ -70,7 +70,7 @@ export default function TrainerSection({ showHeader = true }) {
               <span className="eyebrow-line" />
             </div>
             <h2 className="trainer-title">
-              Our Client &amp; Expert <span className="trainer-title-highlight">Trainers</span>
+              Expert <span className="trainer-title-highlight">Trainers</span>
             </h2>
             <p className="trainer-subtitle">
               Your fitness journey is guided by a dedicated team of professionals.<br />
