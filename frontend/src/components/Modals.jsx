@@ -37,38 +37,6 @@ function Enroll({ data, close }) {
     setErr('');
     const msg = `Hi TrainXShiv! I want to start my transformation.\nName: ${f.name}\nPhone: ${f.phone}\nGoal: ${goals[f.goal] || f.goal}\nPlan: ${f.plan || 'Not sure yet'}\n${f.note ? 'Note: ' + f.note : ''}`;
     
-    // Sync lead to Admin CRM / Backend
-    try {
-      fetch('http://localhost:5000/api/inquiries', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: f.name,
-          phone: f.phone,
-          goal: goals[f.goal] || f.goal,
-          plan: f.plan || 'General Transformation',
-          notes: f.note || '',
-        }),
-      }).catch(() => {});
-      
-      const local = localStorage.getItem('trainxshiv_cms_data');
-      if (local) {
-        const parsed = JSON.parse(local);
-        parsed.inquiries = parsed.inquiries || [];
-        parsed.inquiries.unshift({
-          id: 'INQ-' + Date.now().toString().slice(-5),
-          name: f.name,
-          phone: f.phone,
-          goal: goals[f.goal] || f.goal,
-          plan: f.plan || 'General Transformation',
-          notes: f.note || '',
-          status: 'New',
-          createdAt: new Date().toISOString(),
-        });
-        localStorage.setItem('trainxshiv_cms_data', JSON.stringify(parsed));
-      }
-    } catch (e) {}
-
     window.open(waLink(msg), '_blank');
     setSent(true);
   };

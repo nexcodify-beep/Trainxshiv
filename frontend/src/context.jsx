@@ -2,7 +2,6 @@ import { createContext, useContext, useState, useEffect, useCallback } from 'rea
 import initialData from './initialData.json';
 
 const STORAGE_KEY = 'trainxshiv_cms_data';
-const API_URL = 'http://localhost:5000/api/content';
 
 // Modal Context
 const ModalCtx = createContext(null);
@@ -41,25 +40,20 @@ export function ContentProvider({ children }) {
     return initialData;
   });
 
-  const syncFromRemote = useCallback(async () => {
+  const syncFromRemote = useCallback(() => {
     try {
-      const res = await fetch(API_URL, { signal: AbortSignal.timeout(2500) });
-      if (res.ok) {
-        const json = await res.json();
-        if (json.success && json.data) {
-          setContent(json.data);
-          localStorage.setItem(STORAGE_KEY, JSON.stringify(json.data));
-        }
-      }
-    } catch {
-      // Backend offline, keep local/default
+      const stored = localStorage.getItem(STORAGE_KEY);
+      setContent(stored ? { ...initialData, ...JSON.parse(stored) } : initialData);
+    } catch (e) {
+      console.warn('Failed to load saved site content:', e);
+      setContent(initialData);
     }
   }, []);
 
   useEffect(() => {
     syncFromRemote();
 
-    // Listen to localStorage changes across browser tabs (Admin <-> Frontend live sync!)
+    // Listen for content changes saved by another tab on this browser.
     const handleStorageChange = (e) => {
       if (e.key === STORAGE_KEY && e.newValue) {
         try {

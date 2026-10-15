@@ -24,18 +24,6 @@ export default function App() {
   const [prog, setProg] = useState(0);
   const [loading, setLoading] = useState(true);
 
-  // Background sync with CMS backend
-  useEffect(() => {
-    fetch('http://localhost:5000/api/content')
-      .then((res) => res.json())
-      .then((res) => {
-        if (res.success && res.data) {
-          localStorage.setItem('trainxshiv_cms_data', JSON.stringify(res.data));
-        }
-      })
-      .catch(() => {});
-  }, []);
-
   useEffect(() => { window.scrollTo({ top: 0 }); }, [loc.pathname]);
 
   // scroll progress

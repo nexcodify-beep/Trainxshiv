@@ -19,40 +19,6 @@ export default function Contact() {
     if (f.msg.trim().length < 5) return setErr('Please write a short message.');
     setErr('');
 
-    // Sync lead to Admin CRM / Backend
-    try {
-      fetch('http://localhost:5000/api/inquiries', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: f.name,
-          phone: f.phone,
-          email: f.email,
-          goal: 'Contact Page Inquiry',
-          plan: 'Direct Inquiry',
-          notes: f.msg,
-        }),
-      }).catch(() => {});
-
-      const local = localStorage.getItem('trainxshiv_cms_data');
-      if (local) {
-        const parsed = JSON.parse(local);
-        parsed.inquiries = parsed.inquiries || [];
-        parsed.inquiries.unshift({
-          id: 'INQ-' + Date.now().toString().slice(-5),
-          name: f.name,
-          phone: f.phone,
-          email: f.email,
-          goal: 'Contact Page Inquiry',
-          plan: 'Direct Inquiry',
-          notes: f.msg,
-          status: 'New',
-          createdAt: new Date().toISOString(),
-        });
-        localStorage.setItem('trainxshiv_cms_data', JSON.stringify(parsed));
-      }
-    } catch (e) {}
-
     window.open(waLink(`Hi TrainXShiv!\nName: ${f.name}\nPhone: ${f.phone}\n${f.email ? 'Email: ' + f.email + '\n' : ''}${f.msg}`), '_blank');
     setOk(true);
   };
