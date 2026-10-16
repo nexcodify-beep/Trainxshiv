@@ -57,8 +57,7 @@ export default function Footer() {
           <div className="ft-col">
             <h4 className="ft-col-title">Explore</h4>
             <Link to="/diet-plans" className="ft-link">Diet Plans</Link>
-            <Link to="/pricing" className="ft-link">Pricing</Link>
-            <Link to="/blog" className="ft-link">Blog</Link>
+            <Link to="/programs" className="ft-link">All Programs</Link>
             <Link to="/contact" className="ft-link">Contact</Link>
           </div>
 

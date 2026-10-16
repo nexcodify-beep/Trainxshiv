@@ -29,12 +29,10 @@ export const BRAND = {
 
 export const NAV = [
   ['Home', '/'],
-  ['About Trainers', '/trainers'],
+  ['About Trainer', '/trainers'],
   ['Programs', '/programs'],
   ['Transformations', '/transformations'],
   ['Diet Plans', '/diet-plans'],
-  ['Pricing', '/pricing'],
-  ['Blog', '/blog'],
   ['Contact', '/contact'],
 ];
 

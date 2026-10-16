@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Routes, Route, useLocation } from 'react-router-dom';
+import { Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import { MessageCircle, ArrowUp } from 'lucide-react';
 import FitnessPreloader from './components/FitnessPreloader';
 import Navbar from './components/Navbar';
@@ -12,8 +12,6 @@ import Programs from './pages/Programs';
 import Trainers from './pages/Trainers';
 import Transformations from './pages/Transformations';
 import DietPlans from './pages/DietPlans';
-import Pricing from './pages/Pricing';
-import Blog from './pages/Blog';
 import Contact from './pages/Contact';
 import { Legal, NotFound } from './pages/Misc';
 
@@ -131,11 +129,12 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/programs" element={<Programs />} />
           <Route path="/trainers" element={<Trainers />} />
+          <Route path="/about-trainer" element={<Trainers />} />
           <Route path="/about-trainers" element={<Trainers />} />
           <Route path="/transformations" element={<Transformations />} />
           <Route path="/diet-plans" element={<DietPlans />} />
-          <Route path="/pricing" element={<Pricing />} />
-          <Route path="/blog" element={<Blog />} />
+          <Route path="/pricing" element={<Navigate to="/programs" replace />} />
+          <Route path="/blog" element={<Navigate to="/" replace />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/privacy" element={<Legal />} />
           <Route path="/terms" element={<Legal />} />
