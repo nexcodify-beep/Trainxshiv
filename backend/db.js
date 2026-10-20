@@ -213,12 +213,15 @@ async function saveFullContentToMySQL(data) {
   try {
     await conn.beginTransaction();
 
-    // 1. Site Settings (brand, hero)
+    // 1. Site Settings (brand, hero, certificates)
     if (data.brand) {
       await conn.query('REPLACE INTO `site_settings` (`setting_key`, `setting_value`) VALUES (?, ?)', ['brand', JSON.stringify(data.brand)]);
     }
     if (data.hero) {
       await conn.query('REPLACE INTO `site_settings` (`setting_key`, `setting_value`) VALUES (?, ?)', ['hero', JSON.stringify(data.hero)]);
+    }
+    if (data.certificates) {
+      await conn.query('REPLACE INTO `site_settings` (`setting_key`, `setting_value`) VALUES (?, ?)', ['certificates', JSON.stringify(data.certificates)]);
     }
 
     // 2. Programs
@@ -459,6 +462,7 @@ async function getFullContentFromMySQL() {
     return {
       brand: settings.brand,
       hero: settings.hero,
+      certificates: settings.certificates || loadInitialSeed().certificates || [],
       programs,
       plans,
       paidDiets,

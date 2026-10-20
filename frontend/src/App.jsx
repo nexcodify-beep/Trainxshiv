@@ -20,19 +20,21 @@ import { BRAND } from './data';
 export default function App() {
   const loc = useLocation();
   const [prog, setProg] = useState(0);
+  const [showTop, setShowTop] = useState(false);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => { window.scrollTo({ top: 0 }); }, [loc.pathname]);
 
-  // scroll progress
+  // scroll progress & show back-to-top button
   useEffect(() => {
     const f = () => {
-      const h = document.documentElement.scrollHeight - innerHeight;
-      setProg(h > 0 ? (scrollY / h) * 100 : 0);
+      const h = document.documentElement.scrollHeight - window.innerHeight;
+      setProg(h > 0 ? (window.scrollY / h) * 100 : 0);
+      setShowTop(window.scrollY > 150);
     };
     f();
-    addEventListener('scroll', f, { passive: true });
-    return () => removeEventListener('scroll', f);
+    window.addEventListener('scroll', f, { passive: true });
+    return () => window.removeEventListener('scroll', f);
   }, []);
 
   // reveal on scroll
@@ -144,8 +146,27 @@ export default function App() {
       <Footer />
       <Modals />
       <div className="fabs">
-        {prog > 12 && <button className="fab up" aria-label="Back to top" onClick={() => scrollTo({ top: 0, behavior: 'smooth' })}><ArrowUp size={20} /></button>}
-        <a className="fab wa" href={waLink('Hi TrainXShiv! I want to know more about your programs.')} target="_blank" rel="noreferrer" aria-label="Chat on WhatsApp"><MessageCircle size={24} /></a>
+        {showTop && (
+          <button
+            type="button"
+            className="fab up"
+            aria-label="Back to top"
+            title="Scroll to top"
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          >
+            <ArrowUp size={22} strokeWidth={2.5} />
+          </button>
+        )}
+        <a
+          className="fab wa"
+          href={waLink('Hi TrainXShiv! I want to know more about your programs.')}
+          target="_blank"
+          rel="noreferrer"
+          aria-label="Chat on WhatsApp"
+          title="Chat on WhatsApp"
+        >
+          <MessageCircle size={24} />
+        </a>
       </div>
     </>
   );

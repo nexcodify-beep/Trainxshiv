@@ -46,7 +46,13 @@ function loadFileContent() {
 
 function saveFileContent(data) {
   try {
-    fs.writeFileSync(DATA_FILE, JSON.stringify(data, null, 2), 'utf-8');
+    const jsonStr = JSON.stringify(data, null, 2);
+    fs.writeFileSync(DATA_FILE, jsonStr, 'utf-8');
+    fs.writeFileSync(INITIAL_DATA_FILE, jsonStr, 'utf-8');
+    const frontendInitial = path.join(__dirname, '../frontend/src/initialData.json');
+    if (fs.existsSync(path.dirname(frontendInitial))) {
+      fs.writeFileSync(frontendInitial, jsonStr, 'utf-8');
+    }
   } catch (err) {
     console.error('Error writing file backup:', err.message);
   }

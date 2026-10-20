@@ -2,6 +2,8 @@ import { useState, useEffect, useCallback } from 'react';
 import Sidebar from './components/Sidebar';
 import TopBar from './components/TopBar';
 import Toast from './components/Toast';
+import PageNavBar from './components/PageNavBar';
+import SectionModals from './components/SectionModals';
 
 import Dashboard from './pages/Dashboard';
 import BrandSettings from './pages/BrandSettings';
@@ -25,7 +27,8 @@ export default function App() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [hasUnsaved, setHasUnsaved] = useState(false);
-  const [activeTab, setActiveTab] = useState('dashboard');
+  const [activeTab, setActiveTab] = useState('hero');
+  const [activeModal, setActiveModal] = useState(null);
   const [collapsed, setCollapsed] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [dbStatus, setDbStatus] = useState({ online: false, database: 'Local Fallback', mysqlConnected: false });
@@ -73,10 +76,81 @@ export default function App() {
     setSaving(false);
     setHasUnsaved(false);
     if (result.source === 'backend') {
-      showToast('All changes synced to backend API!');
+      showToast('All changes synced to MySQL backend API!');
     } else {
       showToast('Saved locally in browser storage!');
     }
+  };
+
+  // Modal section launcher
+  const handleOpenSectionModal = (secId) => {
+    if (secId === 'home_hero' || secId === 'home_stats') {
+      setActiveModal('home_hero');
+    } else if (secId === 'instagram_reviews') {
+      setActiveModal('instagram_reviews');
+    } else if (secId === 'head_trainer') {
+      setActiveModal('head_trainer');
+    } else if (secId === 'certificates') {
+      setActiveModal('certificates');
+    } else if (secId === 'metrics_strip') {
+      setActiveModal('metrics_strip');
+    } else if (secId === 'team_trainers') {
+      setActiveTab('trainers');
+    } else if (secId === 'manage_programs') {
+      setActiveTab('programs');
+    } else if (secId === 'manage_pricing') {
+      setActiveTab('pricing');
+    } else if (secId === 'manage_diets') {
+      setActiveTab('diets');
+    } else if (secId === 'diet_generator') {
+      setActiveModal('diet_generator');
+    } else if (secId === 'manage_transforms') {
+      setActiveTab('transforms');
+    } else if (secId === 'brand_contact' || secId === 'brand_announcement') {
+      setActiveModal('brand_contact');
+    } else if (secId === 'view_inquiries') {
+      setActiveTab('inquiries');
+    } else if (secId === 'view_backup') {
+      setActiveTab('backup');
+    } else {
+      setActiveModal(secId);
+    }
+  };
+
+  const handleSaveModalData = async (nextData) => {
+    setData(nextData);
+    setSaving(true);
+    const result = await saveContent(nextData);
+    setSaving(false);
+    setHasUnsaved(false);
+    if (result.source === 'backend') {
+      showToast('✅ Saved to MySQL database & synced to frontend!');
+    } else {
+      showToast('✅ Saved locally & synced to frontend!');
+    }
+  };
+
+  const getMappedPage = (tab) => {
+    if (tab === 'home' || tab === 'hero') return 'home';
+    if (tab === 'about' || tab === 'trainers') return 'about';
+    if (tab === 'programs' || tab === 'pricing') return 'programs';
+    if (tab === 'diets') return 'diets';
+    if (tab === 'transforms' || tab === 'videos' || tab === 'testimonials') return 'transforms';
+    if (tab === 'contact' || tab === 'brand') return 'contact';
+    if (tab === 'inquiries') return 'inquiries';
+    if (tab === 'backup') return 'backup';
+    return 'home';
+  };
+
+  const handleSelectPage = (pageId) => {
+    if (pageId === 'home') setActiveTab('hero');
+    else if (pageId === 'about') setActiveTab('trainers');
+    else if (pageId === 'programs') setActiveTab('programs');
+    else if (pageId === 'diets') setActiveTab('diets');
+    else if (pageId === 'transforms') setActiveTab('transforms');
+    else if (pageId === 'contact') setActiveTab('brand');
+    else if (pageId === 'inquiries') setActiveTab('inquiries');
+    else if (pageId === 'backup') setActiveTab('backup');
   };
 
   if (loading || !data) {
@@ -174,6 +248,15 @@ export default function App() {
           hasUnsaved={hasUnsaved}
           searchTerm={searchTerm}
           setSearchTerm={setSearchTerm}
+        />
+
+        {/* Page-wise Navigation with Section Action Buttons */}
+        <PageNavBar
+          activePage={getMappedPage(activeTab)}
+          setActivePage={handleSelectPage}
+          onOpenSectionModal={handleOpenSectionModal}
+          counts={counts}
+          dbStatus={dbStatus}
         />
 
         <main className="admin-content">
@@ -298,6 +381,16 @@ export default function App() {
       </div>
 
       <Toast toasts={toasts} removeToast={removeToast} />
+
+      {/* Dedicated Section Edit Modal */}
+      {activeModal && (
+        <SectionModals
+          modalType={activeModal}
+          data={data}
+          onClose={() => setActiveModal(null)}
+          onSave={handleSaveModalData}
+        />
+      )}
     </div>
   );
 }

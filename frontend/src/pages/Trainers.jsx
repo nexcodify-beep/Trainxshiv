@@ -23,72 +23,80 @@ import {
   ExternalLink,
   Flame,
   Sparkles,
+  Maximize2,
+  X,
+  Search,
 } from 'lucide-react';
 import { HEAD_TRAINER as DEFAULT_HEAD, BRAND as DEFAULT_BRAND, TEAM_TRAINERS as DEFAULT_TEAM } from '../data';
 import { useModal, useContent } from '../context';
 
 export default function Trainers() {
   const { open } = useModal();
-  const { headTrainer: dynamicHead, brand: dynamicBrand, teamTrainers: dynamicTeam } = useContent();
+  const { headTrainer: dynamicHead, brand: dynamicBrand, teamTrainers: dynamicTeam, certificates: dynamicCerts } = useContent();
   const HEAD_TRAINER = dynamicHead || DEFAULT_HEAD;
   const BRAND = dynamicBrand || DEFAULT_BRAND;
   const TEAM_TRAINERS = dynamicTeam || DEFAULT_TEAM;
 
   const [activeCert, setActiveCert] = useState(0);
+  const [selectedCertModal, setSelectedCertModal] = useState(null);
 
-  // Certificates for slider - placeholder cards ready for certificate photos
-  const CERTIFICATES = [
+  // Certificates for slider - 4 official slots in exact order:
+  // 1. Personal Training
+  // 2. Nutrition
+  // 3. Injury Prevention & Rehab
+  // 4. Specialization (Powerlifting & Strength)
+  const DEFAULT_CERTIFICATES = [
     {
       id: 1,
-      title: 'ISSA Certified Fitness Trainer (CFT)',
-      org: 'International Sports Sciences Association',
-      badge: 'Certified Master Trainer',
-      year: 'Accredited',
-      desc: 'Expertise in biomechanics, progressive overload strength training and injury-free exercise mechanics.',
+      category: 'personal_training',
+      title: 'Diploma in Personal Trainer',
+      org: 'Fitness With Gomzi - International Institute of Teaching (FGIIT) & INPTA',
+      badge: '1. Personal Training',
+      year: 'Accredited 2025',
+      img: '/images/certificate/personal-training.jpg',
+      desc: 'Certified in progressive overload, biomechanics, posture analysis, customized exercise programming, and functional movement.',
       icon: Award,
       accent: '#FFD700',
     },
     {
       id: 2,
-      title: 'Certified Nutrition & Diet Planning',
-      org: 'Sports Nutrition & Macronutrient Specialist',
-      badge: 'Certified Nutritionist',
-      year: 'Accredited',
-      desc: 'Custom macro calculation, flexible Indian diet planning, fat loss & muscle building meal structures.',
+      category: 'nutrition',
+      title: 'Diploma in Nutrition',
+      org: 'Fitness With Gomzi - International Institute of Teaching (FGIIT) & INPTA',
+      badge: '2. Nutrition & Dietetics',
+      year: 'Accredited 2025',
+      img: '/images/certificate/nutrition.jpg',
+      desc: 'Specialized in clinical macronutrient calculations, Indian diet planning, fat loss, muscle building, and metabolic health.',
       icon: Dumbbell,
       accent: '#22C55E',
     },
     {
       id: 3,
-      title: 'Transformation & Fat Loss Specialist',
-      org: 'Physique Transformation Academy',
-      badge: 'Body Recomposition Specialist',
-      year: 'Accredited',
-      desc: 'Proven protocol for sustained fat loss, metabolic recovery and natural body recomposition.',
-      icon: Flame,
-      accent: '#F97316',
+      category: 'injury',
+      title: 'Injury Rehabilitation Masterclass',
+      org: 'Fitness With Gomzi - International Institute of Teaching (FGIIT) & INPTA',
+      badge: '3. Injury & Rehab',
+      year: 'Accredited 2025',
+      img: '/images/certificate/injury.jpg',
+      desc: 'Specialized in joint stabilization, pain-free movement patterns, corrective exercise rehab, and injury prevention.',
+      icon: ShieldCheck,
+      accent: '#38BDF8',
     },
     {
       id: 4,
-      title: 'Muscle Building & Strength Training',
-      org: 'Hypertrophy & Strength Conditioning',
-      badge: 'Hypertrophy Specialist',
-      year: 'Accredited',
-      desc: 'Science-based progressive programming for natural muscle gain, strength milestones & posture.',
-      icon: Target,
-      accent: '#3B82F6',
-    },
-    {
-      id: 5,
-      title: 'Lifestyle & Mindset Coaching',
-      org: 'Behavioral Habit Transformation',
-      badge: 'Mindset & Lifestyle Coach',
-      year: 'Accredited',
-      desc: 'Building sustainable lifelong fitness habits without restrictive or unrealistic crash diets.',
-      icon: Sparkles,
-      accent: '#A855F7',
+      category: 'specialization',
+      title: 'Powerlifting Coach Masterclass',
+      org: 'Fitness With Gomzi - International Institute of Teaching (FGIIT) & INPTA',
+      badge: '4. Powerlifting & Strength',
+      year: 'Accredited 2025',
+      img: '/images/certificate/specialization.jpg',
+      desc: 'Advanced programming for maximal strength, squat-bench-deadlift biomechanics, nervous system conditioning, and athletic performance.',
+      icon: Flame,
+      accent: '#F97316',
     },
   ];
+
+  const CERTIFICATES = Array.isArray(dynamicCerts) && dynamicCerts.length > 0 ? dynamicCerts : DEFAULT_CERTIFICATES;
 
   const nextCert = () => {
     setActiveCert((prev) => (prev + 1) % CERTIFICATES.length);
@@ -351,25 +359,45 @@ export default function Trainers() {
           <div className="cert-slider-wrapper">
             <div className="cert-cards-track">
               {CERTIFICATES.map((cert, index) => {
-                const IconComp = cert.icon;
+                const IconComp = cert.icon || Award;
                 const isSelected = index === activeCert;
+                const imgSrc = cert.img || `/images/certificate/${cert.category || 'personal-training'}.svg`;
                 return (
                   <article
-                    key={cert.id}
+                    key={cert.id || index}
                     className={`cert-slide-card ${isSelected ? 'active-cert' : ''}`}
                     onClick={() => setActiveCert(index)}
                   >
                     <div className="cert-card-top">
                       <div className="cert-badge-tag">
-                        <IconComp size={15} style={{ color: cert.accent }} />
+                        <IconComp size={15} style={{ color: cert.accent || '#FFD700' }} />
                         <span>{cert.badge}</span>
                       </div>
                       <span className="cert-accredited-pill">Verified</span>
                     </div>
 
-                    <div className="cert-seal-box">
-                      <Award size={36} className="cert-gold-seal" />
-                      <div className="cert-seal-text">TRAINXSHIV CERTIFIED</div>
+                    {/* Certificate Official Image Card with Zoom trigger */}
+                    <div
+                      className="cert-img-preview-box"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setSelectedCertModal(cert);
+                      }}
+                      role="button"
+                      tabIndex={0}
+                      title="Click to view full certificate"
+                    >
+                      <img
+                        src={imgSrc}
+                        alt={cert.title}
+                        className="cert-thumbnail-img"
+                        loading="lazy"
+                      />
+                      <div className="cert-zoom-overlay">
+                        <span className="cert-zoom-btn">
+                          <Maximize2 size={16} /> View Certificate
+                        </span>
+                      </div>
                     </div>
 
                     <h3 className="cert-card-title">{cert.title}</h3>
@@ -377,8 +405,17 @@ export default function Trainers() {
                     <p className="cert-card-desc">{cert.desc}</p>
 
                     <div className="cert-card-footer">
-                      <span className="cert-status-dot" />
-                      <span>Certified &amp; Active Practicing Coach</span>
+                      <button
+                        type="button"
+                        className="btn-cert-view-modal"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setSelectedCertModal(cert);
+                        }}
+                      >
+                        <Search size={14} /> Full Credential View
+                      </button>
+                      <span className="cert-status-dot" title="Active Credential" />
                     </div>
                   </article>
                 );
@@ -758,6 +795,52 @@ export default function Trainers() {
           </div>
         </div>
       </section>
+
+      {/* ========================================================
+          FULLSCREEN CERTIFICATE LIGHTBOX MODAL
+      ======================================================== */}
+      {selectedCertModal && (
+        <div
+          className="cert-lightbox-overlay"
+          onClick={() => setSelectedCertModal(null)}
+          role="dialog"
+          aria-modal="true"
+        >
+          <div className="cert-lightbox-container" onClick={(e) => e.stopPropagation()}>
+            <div className="cert-lightbox-header">
+              <div className="cert-lh-meta">
+                <span className="cert-lh-badge">{selectedCertModal.badge}</span>
+                <h3 className="cert-lh-title">{selectedCertModal.title}</h3>
+                <p className="cert-lh-org">{selectedCertModal.org}</p>
+              </div>
+              <button
+                type="button"
+                className="cert-lh-close"
+                onClick={() => setSelectedCertModal(null)}
+                aria-label="Close Certificate Preview"
+              >
+                <X size={22} />
+              </button>
+            </div>
+
+            <div className="cert-lightbox-image-viewport">
+              <img
+                src={selectedCertModal.img || `/images/certificate/${selectedCertModal.category || 'personal-training'}.svg`}
+                alt={selectedCertModal.title}
+                className="cert-lightbox-full-img"
+              />
+            </div>
+
+            <div className="cert-lightbox-footer">
+              <p className="cert-lh-desc">{selectedCertModal.desc}</p>
+              <div className="cert-lh-verified-tag">
+                <ShieldCheck size={16} className="text-yellow" />
+                <span>Verified Active Credential &bull; Master Coach Shivan Singh</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

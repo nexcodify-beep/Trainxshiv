@@ -32,10 +32,23 @@ export function ContentProvider({ children }) {
         const stored = localStorage.getItem(STORAGE_KEY);
         if (stored) {
           const parsed = JSON.parse(stored);
-          if (!parsed.programs || parsed.programs.length < 9 || parsed.programs.some(p => p.id === 'offline-pt' && p.img?.includes('shivamsingh.png'))) {
+          if (
+            !parsed.programs ||
+            parsed.programs.length < 9 ||
+            parsed.programs.some(p => p.id === 'offline-pt' && p.img?.includes('shivamsingh.png')) ||
+            parsed.programs.some(p => p.id === 'online-group-coaching' && !p.img)
+          ) {
             parsed.programs = initialData.programs;
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(parsed));
           }
+          // Ensure online group coaching has group.jpg
+          const groupCoaching = parsed.programs?.find(p => p.id === 'online-group-coaching');
+          if (groupCoaching && (!groupCoaching.img || groupCoaching.img === '')) {
+            groupCoaching.img = '/images/group.jpg';
+          }
+          if (!parsed.certificates || parsed.certificates.length < 4 || parsed.certificates.some(c => c.img && c.img.endsWith('.svg'))) {
+            parsed.certificates = initialData.certificates;
+          }
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(parsed));
           return { ...initialData, ...parsed };
         }
       } catch (e) {
@@ -50,10 +63,22 @@ export function ContentProvider({ children }) {
       const stored = localStorage.getItem(STORAGE_KEY);
       if (stored) {
         const parsed = JSON.parse(stored);
-        if (!parsed.programs || parsed.programs.length < 9 || parsed.programs.some(p => p.id === 'offline-pt' && p.img?.includes('shivamsingh.png'))) {
+        if (
+          !parsed.programs ||
+          parsed.programs.length < 9 ||
+          parsed.programs.some(p => p.id === 'offline-pt' && p.img?.includes('shivamsingh.png')) ||
+          parsed.programs.some(p => p.id === 'online-group-coaching' && !p.img)
+        ) {
           parsed.programs = initialData.programs;
-          localStorage.setItem(STORAGE_KEY, JSON.stringify(parsed));
         }
+        const groupCoaching = parsed.programs?.find(p => p.id === 'online-group-coaching');
+        if (groupCoaching && (!groupCoaching.img || groupCoaching.img === '')) {
+          groupCoaching.img = '/images/group.jpg';
+        }
+        if (!parsed.certificates || parsed.certificates.length < 4 || parsed.certificates.some(c => c.img && c.img.endsWith('.svg'))) {
+          parsed.certificates = initialData.certificates;
+        }
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(parsed));
         setContent({ ...initialData, ...parsed });
       } else {
         setContent(initialData);
@@ -67,7 +92,22 @@ export function ContentProvider({ children }) {
   useEffect(() => {
     syncFromRemote();
 
-    // Listen for content changes saved by another tab on this browser.
+    // Fetch live from MySQL backend API if available
+    const controller = new AbortController();
+    fetch('http://localhost:5000/api/content', { signal: controller.signal })
+      .then((res) => (res.ok ? res.json() : null))
+      .then((json) => {
+        if (json && json.success && json.data) {
+          const freshData = { ...initialData, ...json.data };
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(freshData));
+          setContent(freshData);
+        }
+      })
+      .catch(() => {
+        // Standalone offline mode, already loaded from localStorage / initialData
+      });
+
+    // Listen for content changes saved by admin on another tab
     const handleStorageChange = (e) => {
       if (e.key === STORAGE_KEY && e.newValue) {
         try {
@@ -77,13 +117,17 @@ export function ContentProvider({ children }) {
     };
 
     window.addEventListener('storage', handleStorageChange);
-    return () => window.removeEventListener('storage', handleStorageChange);
+    return () => {
+      controller.abort();
+      window.removeEventListener('storage', handleStorageChange);
+    };
   }, [syncFromRemote]);
 
   const value = {
     content,
     brand: content.brand || initialData.brand,
     hero: content.hero || initialData.hero,
+    certificates: content.certificates || initialData.certificates || [],
     programs: content.programs || initialData.programs,
     plans: content.plans || initialData.plans,
     paidDiets: content.paidDiets || initialData.paidDiets,

@@ -257,7 +257,7 @@ export default function Sidebar({
         )}
 
         <a
-          href="http://localhost:5173"
+          href={`${window.location.protocol}//${window.location.hostname}:5173`}
           target="_blank"
           rel="noreferrer"
           style={{

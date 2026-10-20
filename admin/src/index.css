@@ -560,3 +560,442 @@ textarea.form-control {
   border-left: 4px solid var(--danger);
 }
 
+/* ========================================================
+   PAGE-WISE TOP NAVIGATION BAR & SECTION PILLS
+======================================================== */
+.admin-page-navbar-wrapper {
+  background: #ffffff;
+  border-bottom: 1px solid var(--border);
+  padding: 12px 24px 10px;
+  position: sticky;
+  top: 73px;
+  z-index: 40;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+.admin-page-buttons-scroll {
+  overflow-x: auto;
+  white-space: nowrap;
+  scrollbar-width: thin;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 6px;
+}
+
+.admin-page-buttons-track {
+  display: flex;
+  gap: 8px;
+  min-width: min-content;
+}
+
+.admin-page-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 16px;
+  border-radius: var(--radius-md);
+  font-size: 0.84rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  background: #f1f5f9;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.admin-page-btn:hover {
+  background: #e2e8f0;
+  color: var(--text-primary);
+}
+
+.admin-page-btn.active {
+  background: linear-gradient(135deg, #FF5E1E 0%, #EA580C 100%);
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(255, 94, 30, 0.3);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.page-pill-badge {
+  font-size: 0.68rem;
+  font-weight: 800;
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.25);
+  color: #ffffff;
+}
+
+.page-pill-badge.gold {
+  background: #FFD700;
+  color: #0f172a;
+}
+
+/* Quick Section Action Pills Bar */
+.admin-section-pills-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px dashed var(--border);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.admin-section-pills-bar::-webkit-scrollbar {
+  display: none;
+}
+
+.pills-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.admin-section-pills-scroll {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  white-space: nowrap;
+  padding-bottom: 2px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.admin-section-pill-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: #0f172a;
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.admin-section-pill-btn:hover {
+  border-color: #FF5E1E;
+  color: #FF5E1E;
+  background: #fff7ed;
+  transform: translateY(-1px);
+}
+
+/* ========================================================
+   DEDICATED SECTION EDIT MODALS
+======================================================== */
+.section-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: smFadeIn 0.2s ease;
+}
+
+@keyframes smFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.section-modal-container {
+  background: #ffffff;
+  border-radius: var(--radius-xl);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
+  max-width: 820px;
+  width: 100%;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  animation: smScaleIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 1px solid var(--border);
+}
+
+@keyframes smScaleIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.section-modal-header {
+  padding: 18px 24px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  background: #f8fafc;
+}
+
+.sm-header-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.sm-header-meta h3 {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.sm-header-meta p {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin: 2px 0 0;
+}
+
+.sm-close-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--text-muted);
+  padding: 6px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.sm-close-btn:hover {
+  background: #e2e8f0;
+  color: var(--text-primary);
+}
+
+.section-modal-body {
+  padding: 24px;
+  overflow-y: auto;
+  max-height: calc(90vh - 145px);
+}
+
+.section-modal-footer {
+  padding: 16px 24px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  background: #f8fafc;
+  position: sticky;
+  bottom: 0;
+}
+
+/* Certificate edit cards inside modal */
+.sm-notice-box {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 16px;
+  background: #fffbeb;
+  border: 1px solid #fef3c7;
+  border-left: 4px solid #f59e0b;
+  border-radius: var(--radius-md);
+  margin-bottom: 20px;
+}
+
+.sm-notice-box strong {
+  display: block;
+  font-size: 0.85rem;
+  color: #92400e;
+  margin-bottom: 2px;
+}
+
+.sm-notice-box p {
+  font-size: 0.78rem;
+  color: #b45309;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.sm-cert-card-edit {
+  background: #f8fafc;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 18px;
+  margin-bottom: 18px;
+}
+
+.sm-cert-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+}
+
+.sm-order-badge {
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: #FF5E1E;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.sm-verified-pill {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #10b981;
+  background: rgba(16, 185, 129, 0.12);
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid rgba(16, 185, 129, 0.25);
+}
+
+.sm-cert-row {
+  display: flex;
+  gap: 18px;
+}
+
+.sm-cert-preview {
+  width: 160px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.sm-cert-preview img {
+  width: 100%;
+  aspect-ratio: 16 / 11;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+  border: 1px solid #cbd5e1;
+  background: #0f172a;
+}
+
+.sm-cert-preview span {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.sm-cert-fields {
+  flex: 1;
+  min-width: 0;
+}
+
+.sm-subhead {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 20px 0 12px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--border);
+}
+
+.sm-subcard {
+  background: #f8fafc;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 16px;
+}
+
+.sm-subcard h5 {
+  font-size: 0.85rem;
+  font-weight: 700;
+  margin: 0 0 12px;
+  color: var(--text-primary);
+}
+
+/* Certificate cards inside TrainersManager */
+.sm-cert-inline-card {
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  transition: all 0.2s ease;
+}
+
+.sm-cert-inline-card:hover {
+  border-color: #cbd5e1;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+}
+
+.sm-cert-thumb-box {
+  width: 110px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.sm-cert-thumb-box img {
+  width: 100%;
+  aspect-ratio: 16 / 11;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid #cbd5e1;
+  background: #0f172a;
+}
+
+.sm-cert-thumb-box span {
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #FF5E1E;
+}
+
+/* Mobile Responsiveness for Admin */
+@media (max-width: 768px) {
+  .admin-page-navbar-wrapper {
+    top: 60px;
+    padding: 10px 14px 8px;
+  }
+
+  .admin-page-btn {
+    padding: 7px 12px;
+    font-size: 0.78rem;
+  }
+
+  .section-modal-overlay {
+    padding: 0;
+    align-items: flex-end;
+  }
+
+  .section-modal-container {
+    max-height: 94vh;
+    border-radius: 20px 20px 0 0;
+    max-width: 100%;
+  }
+
+  .section-modal-header {
+    padding: 14px 18px;
+  }
+
+  .section-modal-body {
+    padding: 16px;
+    max-height: calc(94vh - 130px);
+  }
+
+  .section-modal-footer {
+    padding: 12px 18px;
+  }
+
+  .sm-cert-row {
+    flex-direction: column;
+  }
+
+  .sm-cert-preview {
+    width: 100%;
+    max-width: 220px;
+  }
+}
+
+

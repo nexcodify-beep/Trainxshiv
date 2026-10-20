@@ -162,6 +162,66 @@ export default function TrainersManager({ data, updateData, showToast }) {
         </div>
       </div>
 
+      {/* Official Certifications & Specializations (4 Required Slots) */}
+      <div className="admin-card" style={{ marginBottom: 28 }}>
+        <div className="admin-card-header">
+          <div className="admin-card-title">
+            <Award size={20} color="#FFD700" />
+            Certifications &amp; Specializations (4 Required Slots)
+          </div>
+          <span className="badge badge-success">Displayed on About Page Slider</span>
+        </div>
+
+        <p style={{ fontSize: '0.8125rem', color: 'var(--text-secondary)', marginBottom: 18 }}>
+          Accredited credentials shown in the interactive slider directly below Master Coach Shivan&apos;s photo.
+          Required order: <strong>1. Personal Training</strong> &bull; <strong>2. Nutrition</strong> &bull; <strong>3. Injury &amp; Rehab</strong> &bull; <strong>4. Specialization</strong>.
+        </p>
+
+        <div className="grid-2">
+          {(data.certificates || []).map((cert, idx) => (
+            <div key={cert.id || idx} className="sm-cert-inline-card">
+              <div style={{ display: 'flex', gap: 14, alignItems: 'flex-start' }}>
+                <div className="sm-cert-thumb-box">
+                  <img
+                    src={cert.img || '/images/certificate/personal-training.svg'}
+                    alt={cert.title}
+                    onError={(e) => { e.target.src = '/images/certificate/personal-training.svg'; }}
+                  />
+                  <span>Slot {idx + 1}</span>
+                </div>
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 4 }}>
+                    <span className="badge badge-orange" style={{ fontSize: '0.6875rem' }}>{cert.badge}</span>
+                    <span style={{ fontSize: '0.6875rem', color: '#10b981', fontWeight: 700 }}>VERIFIED</span>
+                  </div>
+                  <h4 style={{ fontSize: '0.9375rem', fontWeight: 700, margin: '2px 0 4px', color: 'var(--text-primary)' }}>
+                    {cert.title}
+                  </h4>
+                  <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginBottom: 8 }}>
+                    {cert.org}
+                  </div>
+                  <div style={{ fontSize: '0.72rem', color: 'var(--text-secondary)', marginBottom: 8 }}>
+                    <code>{cert.img}</code>
+                  </div>
+                  <input
+                    type="text"
+                    className="form-control"
+                    style={{ fontSize: '0.75rem', padding: '6px 10px' }}
+                    value={cert.img || ''}
+                    placeholder="Image URL path"
+                    onChange={(e) => {
+                      const next = [...(data.certificates || [])];
+                      next[idx].img = e.target.value;
+                      updateData({ ...data, certificates: next });
+                    }}
+                  />
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
       {/* Team Trainers */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
         <div>

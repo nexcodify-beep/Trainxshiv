@@ -3596,9 +3596,71 @@ select option {
 
 @media(max-width:900px){ .ft-grid{ grid-template-columns:1fr 1fr; gap:32px; } }
 @media(max-width:520px){ .ft-grid{ grid-template-columns:1fr; } .ft-cta-inner{ flex-direction:column; align-items:flex-start; } }
-.fabs{position:fixed;right:20px;bottom:20px;z-index:90;display:grid;gap:12px}
-.fab{width:54px;height:54px;border-radius:50%;display:grid;place-items:center;color:#fff;box-shadow:0 12px 30px rgba(0,0,0,.28);transition:.3s;animation:pop .5s}
-.fab:hover{transform:translateY(-4px) scale(1.08)}.fab.wa{background:#25D366}.fab.up{background:var(--ink)}
+.fabs {
+  position: fixed;
+  right: 22px;
+  bottom: 24px;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+}
+
+.fab {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.45);
+  transition: all 0.28s cubic-bezier(0.2, 0.8, 0.2, 1);
+  cursor: pointer;
+  border: none;
+  outline: none;
+  text-decoration: none;
+}
+
+.fab:hover {
+  transform: translateY(-4px) scale(1.08);
+}
+
+.fab.wa {
+  background: #25D366;
+  color: #FFFFFF;
+  box-shadow: 0 8px 24px rgba(37, 211, 102, 0.4);
+}
+
+.fab.wa:hover {
+  box-shadow: 0 12px 30px rgba(37, 211, 102, 0.6);
+}
+
+.fab.up {
+  background: #11141b;
+  color: #FFD700;
+  border: 1.5px solid rgba(255, 215, 0, 0.6);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6), 0 0 15px rgba(255, 215, 0, 0.2);
+  animation: fabPopIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.fab.up:hover {
+  background: #FFD700;
+  color: #0B0E14;
+  border-color: #FFD700;
+  box-shadow: 0 10px 30px rgba(255, 215, 0, 0.5);
+}
+
+@keyframes fabPopIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
 
 /* ===================== CUSTOM CURSOR ===================== */
 .cur-dot,.cur-ring{position:fixed;left:0;top:0;pointer-events:none;z-index:9999;display:none}
@@ -3880,7 +3942,7 @@ body.on-text .cur-dot,body.on-text .cur-ring{opacity:0}
 .about-trainer-hero {
   position: relative;
   background: linear-gradient(180deg, #F0F6FE 0%, #FAFCFF 100%);
-  padding: 50px 0 64px;
+  padding: 135px 0 64px;
 }
 
 .about-hero-container {
@@ -5183,7 +5245,7 @@ body.on-text .cur-dot,body.on-text .cur-ring{opacity:0}
 }
 
 .about-trainer-hero {
-  padding: 40px 0 55px;
+  padding: 135px 0 60px;
   background: radial-gradient(circle at 80% 20%, rgba(255, 215, 0, 0.05), transparent 45%),
               linear-gradient(180deg, rgba(22, 25, 34, 0.8) 0%, rgba(17, 20, 27, 1) 100%);
 }
@@ -5438,6 +5500,236 @@ body.on-text .cur-dot,body.on-text .cur-ring{opacity:0}
   text-transform: uppercase;
 }
 
+.cert-img-preview-box {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 11;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #0f131c;
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  margin-bottom: 14px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+}
+
+.cert-thumbnail-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  display: block;
+}
+
+.cert-slide-card:hover .cert-thumbnail-img {
+  transform: scale(1.04);
+}
+
+.cert-zoom-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 14, 23, 0.65);
+  backdrop-filter: blur(2px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.cert-slide-card:hover .cert-zoom-overlay,
+.cert-img-preview-box:hover .cert-zoom-overlay {
+  opacity: 1;
+}
+
+.cert-zoom-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+  color: #0B0E14;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+  transform: translateY(4px);
+  transition: transform 0.25s ease;
+}
+
+.cert-slide-card:hover .cert-zoom-btn {
+  transform: translateY(0);
+}
+
+.btn-cert-view-modal {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 215, 0, 0.1);
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  color: #FFD700;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-cert-view-modal:hover {
+  background: #FFD700;
+  color: #0B0E14;
+}
+
+/* Fullscreen Certificate Lightbox */
+.cert-lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(8, 10, 16, 0.88);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: certFadeIn 0.25s ease;
+}
+
+@keyframes certFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.cert-lightbox-container {
+  background: #131722;
+  border: 1px solid rgba(255, 215, 0, 0.4);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 30px rgba(255, 215, 0, 0.15);
+  border-radius: 20px;
+  max-width: 960px;
+  width: 100%;
+  max-height: 92vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  animation: certScaleUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes certScaleUp {
+  from { transform: scale(0.92); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.cert-lightbox-header {
+  padding: 20px 24px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  background: #181d2a;
+}
+
+.cert-lh-badge {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #FFD700;
+  background: rgba(255, 215, 0, 0.12);
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  padding: 3px 10px;
+  border-radius: 6px;
+  margin-bottom: 6px;
+}
+
+.cert-lh-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  line-height: 1.3;
+  margin-bottom: 4px;
+}
+
+.cert-lh-org {
+  font-size: 0.84rem;
+  color: #94A3B8;
+  font-weight: 500;
+}
+
+.cert-lh-close {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #E2E8F0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+}
+
+.cert-lh-close:hover {
+  background: #FFD700;
+  color: #0B0E14;
+  border-color: #FFD700;
+}
+
+.cert-lightbox-image-viewport {
+  padding: 20px;
+  background: #0b0e14;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: auto;
+  max-height: 60vh;
+}
+
+.cert-lightbox-full-img {
+  max-width: 100%;
+  max-height: 56vh;
+  object-fit: contain;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+  border: 1px solid rgba(255, 215, 0, 0.25);
+}
+
+.cert-lightbox-footer {
+  padding: 16px 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  background: #181d2a;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.cert-lh-desc {
+  font-size: 0.85rem;
+  color: #CBD5E1;
+  max-width: 650px;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.cert-lh-verified-tag {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #22C55E;
+  background: rgba(34, 197, 94, 0.12);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+  padding: 6px 12px;
+  border-radius: 8px;
+}
+
 .cert-seal-box {
   display: flex;
   align-items: center;
@@ -5578,7 +5870,7 @@ body.on-text .cur-dot,body.on-text .cur-ring{opacity:0}
 ======================================================== */
 @media (max-width: 1024px) {
   .about-trainer-hero {
-    padding: 36px 0 50px;
+    padding: 125px 0 50px;
   }
   .about-hero-container {
     grid-template-columns: 1fr !important;
@@ -5626,7 +5918,7 @@ body.on-text .cur-dot,body.on-text .cur-ring{opacity:0}
 
 @media (max-width: 768px) {
   .about-trainer-hero {
-    padding: 28px 0 40px;
+    padding: 115px 0 40px;
   }
   .about-hero-title {
     font-size: clamp(1.8rem, 6vw, 2.3rem);
@@ -5856,7 +6148,7 @@ body.on-text .cur-dot,body.on-text .cur-ring{opacity:0}
 
 @media (max-width: 380px) {
   .about-trainer-hero {
-    padding: 24px 0 32px;
+    padding: 105px 0 32px;
   }
   .about-hero-title {
     font-size: 1.65rem;
