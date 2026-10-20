@@ -6,7 +6,7 @@ import {
 } from 'lucide-react';
 import { BRAND, PROGRAMS, TRAINERS, TRANSFORMS, VIDEO_REVIEWS, TESTIMONIALS, STEPS } from '../data';
 import { useModal, useContent } from '../context';
-import { Icon, Img, Counter, SectionHead, Stars } from './ui';
+import { Icon, Img, Counter, SectionHead, Stars, inr } from './ui';
 import BeforeAfter from './BeforeAfter';
 import { HeroTransformationCard } from './HeroTransformationSlider';
 
@@ -47,10 +47,10 @@ export function Hero({ className = '', isFooterHero = false }) {
   const subtitleText = hero?.subtitle || 'At TrainXShiv, we help you build a stronger, healthier and more confident YOU with personalized training, nutrition and complete lifestyle guidance.';
   const stat1Num = parseInt((hero?.stat1Number || '500').replace(/\D/g, '')) || 500;
   const stat1Suffix = (hero?.stat1Number || '500+').replace(/\d/g, '') || '+';
-  const stat2Num = parseInt((hero?.stat2Number || '98').replace(/\D/g, '')) || 98;
-  const stat2Suffix = (hero?.stat2Number || '98%').replace(/\d/g, '') || '%';
-  const stat3Num = parseInt((hero?.stat3Number || '10').replace(/\D/g, '')) || 10;
-  const stat3Suffix = (hero?.stat3Number || '10+').replace(/\d/g, '') || '+';
+  const stat2Num = parseInt((hero?.stat2Number || '100').replace(/\D/g, '')) || 100;
+  const stat2Suffix = (hero?.stat2Number || '100%').replace(/\d/g, '') || '%';
+  const stat3Num = parseInt((hero?.stat3Number || '7').replace(/\D/g, '')) || 7;
+  const stat3Suffix = (hero?.stat3Number || '7+').replace(/\d/g, '') || '+';
 
   return (
     <section className={`hero-exact-section ${className} ${isFooterHero ? 'hero-footer-style' : ''}`}>
@@ -146,23 +146,81 @@ export function Hero({ className = '', isFooterHero = false }) {
 
 export function ProgramCard({ p }) {
   const { open } = useModal();
+  const priceDisplay = p.priceFormatted || (p.price ? inr(p.price) : (p.from ? inr(p.from) : ''));
+  const periodDisplay = p.pricePeriod || (p.weeks ? `/${p.weeks}` : '');
+  const featuresList = (p.keyFeatures && p.keyFeatures.length > 0) ? p.keyFeatures : (p.features || []);
+
   return (
-    <article className="card pcard">
-      <div className="media"><Img src={p.img} alt={p.title} label={p.cat} /><span className="ico"><Icon name={p.icon} size={22} /></span></div>
+    <article className="card pcard premium-pkg-card">
+      <div className="media">
+        <Img src={p.img} alt={p.title} label={p.cat} />
+        <span className="ico"><Icon name={p.icon || 'Dumbbell'} size={22} /></span>
+        <span className="pcard-category-badge">{p.cat}</span>
+      </div>
       <div className="card-body">
-        <h3>{p.title}</h3>
-        <p className="muted">{p.tag}</p>
-        <ul className="ticks">{p.features.map((x) => <li key={x}><Check size={15} />{x}</li>)}</ul>
-        <div className="meta"><span><Clock size={13} /> {p.weeks}</span><span><BarChart3 size={13} /> {p.level}</span></div>
-        <button className="btn btn-primary btn-sm full" onClick={() => open('program', { id: p.id })}>Explore Program <ArrowRight size={15} /></button>
+        <div className="pcard-pricing-header">
+          <div className="pcard-price-group">
+            <span className="pcard-price-val">{priceDisplay}</span>
+            {periodDisplay && <span className="pcard-price-sub">{periodDisplay}</span>}
+          </div>
+          {p.validity && (
+            <span className="pcard-validity-tag">
+              {p.validity.split('.')[0]}
+            </span>
+          )}
+        </div>
+
+        <h3 className="pcard-title">{p.title}</h3>
+        {p.tagline && <p className="pcard-tagline">{p.tagline}</p>}
+        {p.shortDesc && <p className="pcard-short-desc">{p.shortDesc}</p>}
+
+        <div className="pcard-features-block">
+          <span className="pcard-features-heading">Key Features:</span>
+          <ul className="ticks pcard-ticks">
+            {featuresList.slice(0, 4).map((x) => (
+              <li key={x}>
+                <Check size={14} />
+                <span>{x}</span>
+              </li>
+            ))}
+            {featuresList.length > 4 && (
+              <li className="pcard-more-features-pill" onClick={() => open('program', { id: p.id })}>
+                + {featuresList.length - 4} more features included
+              </li>
+            )}
+          </ul>
+        </div>
+
+        <div className="pcard-actions-row">
+          <button 
+            type="button" 
+            className="btn btn-outline-light btn-sm pcard-action-btn-know" 
+            onClick={() => open('program', { id: p.id })}
+          >
+            <span>Know More</span>
+            <ArrowRight size={13} />
+          </button>
+          
+          <button 
+            type="button" 
+            className="btn btn-primary btn-sm pcard-action-btn-enroll"
+            onClick={() => open('enroll', { program: p.title, plan: p.title })}
+          >
+            <span>{p.knowMore?.ctaText ? 'Get Started' : 'Enroll Now'}</span>
+            <ArrowRight size={13} />
+          </button>
+        </div>
       </div>
     </article>
   );
 }
 
-export function ProgramGrid({ items }) {
+export function ProgramGrid({ items, limit }) {
   const { programs } = useContent();
-  const list = items || programs;
+  let list = items || programs;
+  if (limit && typeof limit === 'number') {
+    list = list.slice(0, limit);
+  }
   return <div className="grid g3 stagger reveal">{list.map((p) => <ProgramCard key={p.id} p={p} />)}</div>;
 }
 

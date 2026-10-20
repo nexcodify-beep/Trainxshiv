@@ -1,25 +1,7 @@
 import { useState } from 'react';
-import { Calculator, Download, RotateCcw, MessageCircle, Leaf, Drumstick } from 'lucide-react';
-import { waLink } from './ui';
+import { Calculator, RotateCcw, MessageCircle, Leaf, Drumstick, ShieldCheck, ArrowRight, CheckCircle2 } from 'lucide-react';
 import { useModal } from '../context';
 
-const MEALS = {
-  veg: {
-    Breakfast: ['Besan chilla (3) + mint chutney + 1 fruit', 'Oats with milk, banana & almonds', 'Paneer bhurji + 2 multigrain rotis'],
-    'Mid-morning': ['Roasted chana + buttermilk', 'Fruit + handful of mixed nuts', 'Hung curd with seeds'],
-    Lunch: ['Dal + 2 rotis + sabzi + salad + curd', 'Rajma or chole + rice + salad', 'Soya chunk curry + brown rice + salad'],
-    'Evening snack': ['Sprouts chaat', 'Protein shake + banana', 'Makhana + green tea'],
-    Dinner: ['Paneer or tofu sabzi + 2 rotis + salad', 'Moong dal khichdi + curd', 'Vegetable dalia + dal'],
-  },
-  nonveg: {
-    Breakfast: ['3 egg-white omelette + 2 whole eggs + 2 brown bread', 'Egg bhurji + 2 rotis + fruit', 'Oats with milk, banana & peanut butter'],
-    'Mid-morning': ['2 boiled eggs + fruit', 'Protein shake + handful of nuts', 'Curd with seeds'],
-    Lunch: ['Grilled chicken + rice + dal + salad', 'Fish curry + rice + salad', 'Chicken curry + 2 rotis + sabzi + curd'],
-    'Evening snack': ['Chicken tikka or boiled egg whites', 'Protein shake + banana', 'Sprouts + green tea'],
-    Dinner: ['Chicken or egg curry + 2 rotis + salad', 'Grilled fish + sautéed veggies', 'Egg bhurji + dal + roti'],
-  },
-};
-const SPLIT = { Breakfast: 0.25, 'Mid-morning': 0.1, Lunch: 0.3, 'Evening snack': 0.1, Dinner: 0.25 };
 const ACT = { sedentary: 1.2, light: 1.375, moderate: 1.55, active: 1.725 };
 
 function calc(f) {
@@ -37,7 +19,15 @@ function calc(f) {
 
 export default function DietTool({ compact }) {
   const { open } = useModal();
-  const [f, setF] = useState({ gender: 'male', age: '', height: '', weight: '', activity: 'moderate', goal: 'fat', food: 'veg' });
+  const [f, setF] = useState({
+    gender: 'male',
+    age: '',
+    height: '',
+    weight: '',
+    activity: 'moderate',
+    goal: 'fat',
+    food: 'veg',
+  });
   const [res, setRes] = useState(null);
   const [err, setErr] = useState('');
   const set = (k) => (e) => setF({ ...f, [k]: e.target.value });
@@ -51,50 +41,81 @@ export default function DietTool({ compact }) {
     setRes(calc(f));
   };
 
-  const text = () => {
-    const m = MEALS[f.food];
-    return [
-      'TRAINXSHIV - FREE DIET PLAN', '',
-      `Daily calories: ${res.kcal} kcal`, `Protein: ${res.protein} g | Carbs: ${res.carbs} g | Fat: ${res.fat} g`, '',
-      ...Object.keys(m).flatMap((k) => [`${k} (~${Math.round(res.kcal * SPLIT[k])} kcal) - pick one:`, ...m[k].map((x) => `  - ${x}`), '']),
-      'Drink 3-4 litres of water daily. This is general guidance, not medical advice.',
-      'Want a plan made just for you? WhatsApp 7080263878',
-    ].join('\n');
-  };
-  const download = () => {
-    const url = URL.createObjectURL(new Blob([text()], { type: 'text/plain' }));
-    const a = document.createElement('a');
-    a.href = url; a.download = 'TrainXShiv-Free-Diet-Plan.txt'; a.click();
-    URL.revokeObjectURL(url);
-  };
-
   if (res) {
-    const m = MEALS[f.food];
     const tot = res.protein * 4 + res.carbs * 4 + res.fat * 9;
+    const waPaymentLink = `https://wa.me/917080263878?text=${encodeURIComponent(
+      `Hi Shivam! I generated my diet plan target on TrainXShiv:\n- Goal: ${f.goal}\n- Target Calories: ${res.kcal} kcal\n- Protein: ${res.protein}g | Carbs: ${res.carbs}g | Fat: ${res.fat}g\n- Weight: ${f.weight} kg, Height: ${f.height} cm\n- Food: ${f.food}\n\nI want to complete the ₹99 payment to get my full personalized diet plan.`
+    )}`;
+
     return (
       <div className="dt-res">
         <div className="dt-top">
-          <div className="dt-kcal"><small>Daily target</small><b>{res.kcal}</b><span>kcal</span></div>
+          <div className="dt-kcal">
+            <small>Your Target Calories</small>
+            <b>{res.kcal}</b>
+            <span>kcal / day</span>
+          </div>
           <div className="dt-macros">
-            {[['Protein', res.protein, res.protein * 4], ['Carbs', res.carbs, res.carbs * 4], ['Fat', res.fat, res.fat * 9]].map(([n, g, k]) => (
-              <div key={n}><div className="row-between"><span>{n}</span><b>{g} g</b></div><div className="bar"><i style={{ width: `${Math.round((k / tot) * 100)}%` }} /></div></div>
+            {[
+              ['Protein', res.protein, res.protein * 4],
+              ['Carbs', res.carbs, res.carbs * 4],
+              ['Fat', res.fat, res.fat * 9],
+            ].map(([n, g, k]) => (
+              <div key={n}>
+                <div className="row-between">
+                  <span>{n}</span>
+                  <b>{g} g</b>
+                </div>
+                <div className="bar">
+                  <i style={{ width: `${Math.round((k / tot) * 100)}%` }} />
+                </div>
+              </div>
             ))}
-            <small className="muted">BMI {res.bmi} · Maintenance ≈ {res.tdee} kcal</small>
+            <small className="muted">BMI {res.bmi} &bull; Maintenance &asymp; {res.tdee} kcal</small>
           </div>
         </div>
-        <div className="dt-meals">
-          {Object.keys(m).map((k) => (
-            <div key={k} className="dt-meal">
-              <div className="row-between"><b>{k}</b><span className="chipx">~{Math.round(res.kcal * SPLIT[k])} kcal</span></div>
-              <ul>{m[k].map((x) => <li key={x}>{x}</li>)}</ul>
-            </div>
-          ))}
-        </div>
-        <p className="muted small">Pick one option per meal. General guidance only, not medical advice.</p>
-        <div className="row wrap">
-          <button className="btn btn-primary" onClick={download}><Download size={17} /> Download Plan</button>
-          <button className="btn btn-ghost" onClick={() => open('enroll', { plan: 'Paid Custom Diet Plan', goal: f.goal })}><MessageCircle size={17} /> Get Custom Paid Plan</button>
-          <button className="btn btn-ghost" onClick={() => setRes(null)}><RotateCcw size={17} /> Recalculate</button>
+
+        {/* ₹99 WhatsApp Payment & Delivery Box */}
+        <div className="dt-payment-box">
+          <div className="dt-payment-header">
+            <div className="dt-price-badge">₹99 ONLY</div>
+            <h4>Get Your Complete Custom Indian Diet Plan</h4>
+          </div>
+          <p className="dt-payment-desc">
+            Your customized meal chart with exact grams, ghar ka khana food swaps, grocery list &amp; portion
+            guidance will be delivered to you on WhatsApp after completing the ₹99 payment.
+          </p>
+          <ul className="dt-payment-perks">
+            <li>
+              <CheckCircle2 size={15} className="text-yellow" />
+              <span>Personalized {f.food === 'veg' ? 'Vegetarian' : 'Non-Vegetarian'} Indian Meals</span>
+            </li>
+            <li>
+              <CheckCircle2 size={15} className="text-yellow" />
+              <span>Exact portion sizes tailored to your {res.kcal} kcal target</span>
+            </li>
+            <li>
+              <CheckCircle2 size={15} className="text-yellow" />
+              <span>Direct WhatsApp delivery by Master Coach Shivam</span>
+            </li>
+          </ul>
+
+          <div className="dt-payment-actions">
+            <a
+              href={waPaymentLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-primary dt-pay-btn"
+            >
+              <MessageCircle size={18} />
+              <span>Pay ₹99 on WhatsApp &amp; Receive Plan</span>
+              <ArrowRight size={16} />
+            </a>
+
+            <button type="button" className="btn btn-ghost btn-sm" onClick={() => setRes(null)}>
+              <RotateCcw size={14} /> Recalculate
+            </button>
+          </div>
         </div>
       </div>
     );
@@ -103,39 +124,97 @@ export default function DietTool({ compact }) {
   return (
     <form className="form" onSubmit={submit}>
       <div className="seg">
-        {[['male', 'Male'], ['female', 'Female']].map(([v, l]) => (
-          <button type="button" key={v} className={`chip ${f.gender === v ? 'on' : ''}`} onClick={() => setF({ ...f, gender: v })}>{l}</button>
+        {[
+          ['male', 'Male'],
+          ['female', 'Female'],
+        ].map(([v, l]) => (
+          <button
+            type="button"
+            key={v}
+            className={`chip ${f.gender === v ? 'on' : ''}`}
+            onClick={() => setF({ ...f, gender: v })}
+          >
+            {l}
+          </button>
         ))}
         <span className="seg-gap" />
-        {[['veg', 'Vegetarian', Leaf], ['nonveg', 'Non-Veg', Drumstick]].map(([v, l, I]) => (
-          <button type="button" key={v} className={`chip ${f.food === v ? 'on' : ''}`} onClick={() => setF({ ...f, food: v })}><I size={14} /> {l}</button>
+        {[
+          ['veg', 'Vegetarian', Leaf],
+          ['nonveg', 'Non-Veg', Drumstick],
+        ].map(([v, l, I]) => (
+          <button
+            type="button"
+            key={v}
+            className={`chip ${f.food === v ? 'on' : ''}`}
+            onClick={() => setF({ ...f, food: v })}
+          >
+            <I size={14} /> {l}
+          </button>
         ))}
       </div>
+
       <div className={`grid ${compact ? 'g2' : 'g3'}`}>
-        <label>Age<input type="number" inputMode="numeric" value={f.age} onChange={set('age')} placeholder="25" /></label>
-        <label>Height (cm)<input type="number" inputMode="numeric" value={f.height} onChange={set('height')} placeholder="170" /></label>
-        <label>Weight (kg)<input type="number" inputMode="numeric" value={f.weight} onChange={set('weight')} placeholder="70" /></label>
+        <label>
+          Age
+          <input
+            type="number"
+            inputMode="numeric"
+            value={f.age}
+            onChange={set('age')}
+            placeholder="25"
+            required
+          />
+        </label>
+        <label>
+          Height (cm)
+          <input
+            type="number"
+            inputMode="numeric"
+            value={f.height}
+            onChange={set('height')}
+            placeholder="170"
+            required
+          />
+        </label>
+        <label>
+          Weight (kg)
+          <input
+            type="number"
+            inputMode="numeric"
+            value={f.weight}
+            onChange={set('weight')}
+            placeholder="70"
+            required
+          />
+        </label>
       </div>
+
       <div className="grid g2">
-        <label>Activity level
+        <label>
+          Activity Level
           <select value={f.activity} onChange={set('activity')}>
-            <option value="sedentary">Mostly sitting (desk job)</option>
-            <option value="light">Light (1-3 workouts / week)</option>
-            <option value="moderate">Moderate (3-5 workouts / week)</option>
-            <option value="active">Very active (6-7 workouts / week)</option>
+            <option value="sedentary">Sedentary (Desk Job, little exercise)</option>
+            <option value="light">Lightly Active (1-3 workouts / week)</option>
+            <option value="moderate">Moderately Active (3-5 workouts / week)</option>
+            <option value="active">Very Active (6-7 intense workouts / week)</option>
           </select>
         </label>
-        <label>Your goal
+        <label>
+          Fitness Goal
           <select value={f.goal} onChange={set('goal')}>
-            <option value="fat">Lose fat</option>
-            <option value="gain">Gain weight</option>
-            <option value="muscle">Build muscle</option>
-            <option value="fit">Stay fit</option>
+            <option value="fat">Fat Loss &amp; Toning</option>
+            <option value="muscle">Lean Muscle Building</option>
+            <option value="gain">Weight Gain</option>
+            <option value="fit">Healthy Lifestyle &amp; Maintenance</option>
           </select>
         </label>
       </div>
-      {err && <p className="err" role="alert">{err}</p>}
-      <button className="btn btn-primary btn-lg" type="submit"><Calculator size={18} /> Generate My Free Plan</button>
+
+      {err && <div className="err">{err}</div>}
+
+      <button type="submit" className="btn btn-primary full">
+        <Calculator size={18} /> Calculate My Plan &bull; ₹99 On WhatsApp
+      </button>
     </form>
   );
 }

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { X, CheckCircle2, Check, Send, Clock, BarChart3, VideoOff } from 'lucide-react';
-import { useModal } from '../context';
+import { X, CheckCircle2, Check, Send, Clock, BarChart3, VideoOff, Target, AlertCircle } from 'lucide-react';
+import { useModal, useContent } from '../context';
 import { BRAND, PROGRAMS, PLANS, BLOG } from '../data';
 import { Icon, Img, inr, waLink } from './ui';
 import DietTool from './DietTool';
@@ -97,20 +97,144 @@ function Video({ data }) {
 }
 
 function ProgramDetail({ data, open }) {
-  const p = PROGRAMS.find((x) => x.id === data.id);
+  const { programs } = useContent();
+  const list = programs || PROGRAMS;
+  const p = list.find((x) => x.id === data.id) || PROGRAMS.find((x) => x.id === data.id);
   if (!p) return null;
+
+  const km = p.knowMore || {};
+  const priceDisplay = p.priceFormatted || (p.price ? inr(p.price) : (p.from ? inr(p.from) : ''));
+  const periodDisplay = p.pricePeriod || (p.weeks ? `/${p.weeks}` : '');
+  const whatYouGet = km.whatYouGet || (p.features ? p.features.map(f => ({ title: f, desc: '' })) : []);
+  const whoIsThisFor = km.whoIsThisFor || [];
+  const headline = km.headline || p.title;
+  const story = km.story || p.tag || '';
+  const important = km.important || null;
+  const ctaText = km.ctaText || 'Get Started Now';
+  const validityText = km.validity || p.validity || '';
+
+  const handleWhatsApp = () => {
+    const text = `Hi Shivam! I want to enroll in "${p.title}" (${priceDisplay}${periodDisplay ? ' ' + periodDisplay : ''}). Please share details on how to get started.`;
+    window.open(waLink(text), '_blank');
+  };
+
   return (
-    <div className="pm">
-      <div className="pm-media"><Img src={p.img} alt={p.title} label={p.title} /></div>
-      <div className="m-body">
-        <span className="pill"><Icon name={p.icon} size={13} />{p.cat}</span>
-        <h3>{p.title}</h3>
-        <p className="muted">{p.tag}</p>
-        <div className="meta"><span><Clock size={14} /> {p.weeks}</span><span><BarChart3 size={14} /> {p.level}</span></div>
-        <ul className="ticks">{p.features.map((x) => <li key={x}><Check size={16} />{x}</li>)}<li><Check size={16} />Weekly check-ins & support</li></ul>
-        <div className="row-between wrap">
-          <div><small className="muted">Starting at</small><div className="price">{inr(p.from)}</div></div>
-          <button className="btn btn-primary btn-lg" onClick={() => open('enroll', { program: p.title, plan: p.title })}>Enroll in this program</button>
+    <div className="pkg-modal-container">
+      {/* Top Header / Pricing Banner */}
+      <div className="pkg-modal-header">
+        <div className="pkg-modal-badges">
+          <span className="pill pkg-cat-pill"><Icon name={p.icon || 'Dumbbell'} size={14} /> {p.cat}</span>
+          {p.weeks && <span className="pill pkg-time-pill"><Clock size={13} /> {p.weeks}</span>}
+        </div>
+        <h2 className="pkg-modal-title">{p.title}</h2>
+        {p.tagline && <p className="pkg-modal-tagline">{p.tagline}</p>}
+
+        <div className="pkg-modal-pricing-card">
+          <div className="pkg-modal-price-row">
+            <div>
+              <span className="pkg-modal-price-label">Program Investment</span>
+              <div className="pkg-modal-price">
+                {priceDisplay}
+                {periodDisplay && <span className="pkg-modal-period">{periodDisplay}</span>}
+              </div>
+            </div>
+            <button className="btn btn-primary pkg-modal-header-cta" onClick={handleWhatsApp}>
+              <Send size={15} />
+              <span>{ctaText}</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div className="pkg-modal-body">
+        {/* Headline & Story */}
+        <div className="pkg-section">
+          <h3 className="pkg-section-title">{headline}</h3>
+          {story.split('\n\n').map((para, idx) => (
+            <p key={idx} className="pkg-story-para">{para}</p>
+          ))}
+        </div>
+
+        {/* What You Get */}
+        {whatYouGet.length > 0 && (
+          <div className="pkg-section">
+            <h4 className="pkg-block-title">
+              <CheckCircle2 size={18} className="text-yellow" />
+              <span>WHAT YOU GET:</span>
+            </h4>
+            <div className="pkg-what-you-get-grid">
+              {whatYouGet.map((item, idx) => (
+                <div key={idx} className="pkg-feature-item">
+                  <div className="pkg-feature-num">{idx + 1}</div>
+                  <div className="pkg-feature-content">
+                    <strong className="pkg-feature-title">{item.title}{item.desc ? ':' : ''}</strong>
+                    {item.desc && <span className="pkg-feature-desc"> {item.desc}</span>}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Who Is This For */}
+        {whoIsThisFor.length > 0 && (
+          <div className="pkg-section">
+            <h4 className="pkg-block-title">
+              <Target size={18} className="text-yellow" />
+              <span>WHO IS THIS FOR?</span>
+            </h4>
+            <ul className="pkg-who-list">
+              {whoIsThisFor.map((item, idx) => (
+                <li key={idx}>
+                  <Check size={16} />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        {/* Important Warning / Note */}
+        {important && (
+          <div className="pkg-important-box">
+            <div className="pkg-important-header">
+              <AlertCircle size={17} />
+              <span>IMPORTANT</span>
+            </div>
+            <p>{important}</p>
+          </div>
+        )}
+
+        {/* Validity Note */}
+        {validityText && (
+          <div className="pkg-validity-note">
+            <strong>VALIDITY:</strong> {validityText}
+          </div>
+        )}
+
+        {/* Bottom CTA Action Row */}
+        <div className="pkg-modal-footer">
+          <div className="pkg-footer-price">
+            <span className="muted small">Package Price</span>
+            <div className="price">{priceDisplay} {periodDisplay}</div>
+          </div>
+          <div className="pkg-footer-actions">
+            <button 
+              type="button" 
+              className="btn btn-outline-light" 
+              onClick={() => open('enroll', { program: p.title, plan: p.title })}
+            >
+              Book Consultation
+            </button>
+            <button 
+              type="button" 
+              className="btn btn-primary btn-lg" 
+              onClick={handleWhatsApp}
+            >
+              <Send size={16} />
+              <span>{ctaText}</span>
+            </button>
+          </div>
         </div>
       </div>
     </div>

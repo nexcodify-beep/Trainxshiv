@@ -46,24 +46,53 @@ export function Img({ src, alt = '', label, className = '', logo = false, ...res
 
 export function Counter({ to, suffix = '', duration = 1600 }) {
   const ref = useRef(null);
-  const [v, setV] = useState(0);
+  const targetVal = typeof to === 'number' && !isNaN(to) ? to : parseInt(String(to).replace(/\D/g, '')) || 0;
+  const [v, setV] = useState(() => (typeof window === 'undefined' ? targetVal : 0));
+
   useEffect(() => {
     const el = ref.current;
-    const io = new IntersectionObserver(([e]) => {
-      if (!e.isIntersecting) return;
-      io.disconnect();
+    if (!el || typeof targetVal !== 'number') {
+      setV(targetVal);
+      return;
+    }
+
+    if (typeof IntersectionObserver === 'undefined') {
+      setV(targetVal);
+      return;
+    }
+
+    let started = false;
+    const startAnimation = () => {
+      if (started) return;
+      started = true;
       const s = performance.now();
       const tick = (t) => {
         const p = Math.min((t - s) / duration, 1);
-        setV(Math.round(to * (1 - Math.pow(1 - p, 3))));
+        setV(Math.round(targetVal * (1 - Math.pow(1 - p, 3))));
         if (p < 1) requestAnimationFrame(tick);
       };
       requestAnimationFrame(tick);
-    });
+    };
+
+    // If already in viewport on mount, animate immediately
+    const rect = el.getBoundingClientRect();
+    if (rect.top <= window.innerHeight && rect.bottom >= 0) {
+      startAnimation();
+      return;
+    }
+
+    const io = new IntersectionObserver(([e]) => {
+      if (!e.isIntersecting) return;
+      io.disconnect();
+      startAnimation();
+    }, { threshold: 0.05 });
+
     io.observe(el);
     return () => io.disconnect();
-  }, [to, duration]);
-  return <span ref={ref}>{v}{suffix}</span>;
+  }, [targetVal, duration]);
+
+  const displayVal = v !== undefined && v !== null ? v : targetVal;
+  return <span ref={ref}>{displayVal}{suffix}</span>;
 }
 
 export function SectionHead({ eyebrow, title, sub, action, light }) {

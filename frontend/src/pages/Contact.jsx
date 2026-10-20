@@ -25,7 +25,13 @@ export default function Contact() {
   const info = [[Phone, 'Call us', BRAND.phone, `tel:${BRAND.phone}`], [Mail, 'Email', BRAND.email, `mailto:${BRAND.email}`], [Instagram, 'Instagram', '@trainxshiv', BRAND.instagram], [MapPin, 'Location', BRAND.city, '#map']];
   return (
     <>
-      <section className="page-hero"><div className="container"><span className="pill">Contact</span><h1>Talk to a <em>Coach</em></h1><p>Questions about a plan? Send a message and we will reply on WhatsApp.</p></div></section>
+      <section className="page-hero compact-hero">
+        <div className="container">
+          <span className="pill">Contact Team</span>
+          <h1>Talk to a <span className="text-yellow">Coach</span></h1>
+          <p>Questions about a program or personal coaching? Send a message and we will connect on WhatsApp.</p>
+        </div>
+      </section>
       <section className="section tight"><div className="container contact-grid">
         <div className="grid g1 stagger reveal">
           {info.map(([I, t, v, h]) => (

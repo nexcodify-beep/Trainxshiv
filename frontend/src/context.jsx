@@ -31,7 +31,12 @@ export function ContentProvider({ children }) {
       try {
         const stored = localStorage.getItem(STORAGE_KEY);
         if (stored) {
-          return { ...initialData, ...JSON.parse(stored) };
+          const parsed = JSON.parse(stored);
+          if (!parsed.programs || parsed.programs.length < 9 || parsed.programs.some(p => p.id === 'offline-pt' && p.img?.includes('shivamsingh.png'))) {
+            parsed.programs = initialData.programs;
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(parsed));
+          }
+          return { ...initialData, ...parsed };
         }
       } catch (e) {
         console.warn('Failed to parse cached data:', e);
@@ -43,7 +48,16 @@ export function ContentProvider({ children }) {
   const syncFromRemote = useCallback(() => {
     try {
       const stored = localStorage.getItem(STORAGE_KEY);
-      setContent(stored ? { ...initialData, ...JSON.parse(stored) } : initialData);
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        if (!parsed.programs || parsed.programs.length < 9 || parsed.programs.some(p => p.id === 'offline-pt' && p.img?.includes('shivamsingh.png'))) {
+          parsed.programs = initialData.programs;
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(parsed));
+        }
+        setContent({ ...initialData, ...parsed });
+      } else {
+        setContent(initialData);
+      }
     } catch (e) {
       console.warn('Failed to load saved site content:', e);
       setContent(initialData);

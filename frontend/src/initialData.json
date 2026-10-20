@@ -11,8 +11,8 @@
     "heroBadge": "Start With Coach Shivam",
     "announcement": {
       "enabled": true,
-      "text": "⚡ Special Offer: Get 30% Off On 12-Week Transformation Packages! Limited Slots Left.",
-      "link": "/pricing"
+      "text": "\u26a1 Special Offer: Get 30% Off On 12-Week Transformation Packages! Limited Slots Left.",
+      "link": "/programs"
     }
   },
   "hero": {
@@ -22,65 +22,699 @@
     "ctaSecondary": "Explore Programs",
     "stat1Number": "500+",
     "stat1Label": "Happy Clients",
-    "stat2Number": "98%",
+    "stat2Number": "100%",
     "stat2Label": "Success Rate",
-    "stat3Number": "10+",
+    "stat3Number": "7+",
     "stat3Label": "Years Experience"
   },
   "programs": [
     {
-      "id": "online",
-      "cat": "Online Coaching",
+      "id": "offline-pt",
+      "title": "Offline Personal Training",
+      "cat": "Personal Coaching",
+      "icon": "Dumbbell",
+      "img": "/images/personal.jpg",
+      "price": 20000,
+      "priceFormatted": "\u20b920,000",
+      "pricePeriod": "/month",
+      "from": 20000,
+      "weeks": "Monthly",
+      "level": "All Levels",
+      "validity": "Monthly package. Session frequency and total sessions to be confirmed before publishing.",
+      "tagline": "Your Trainer. Your Home. Your Schedule.",
+      "tag": "Your Trainer. Your Home. Your Schedule.",
+      "shortDesc": "No time to travel to the gym? I will come to your home or your preferred gym and train you personally. Get professional fitness coaching without disturbing your daily schedule.",
+      "keyFeatures": [
+        "Doorstep Personal Training",
+        "Training at Your Home or Gym",
+        "Customized Workout Plan",
+        "Diet Plan and Guidance",
+        "Exercise Form Correction and Progress Tracking"
+      ],
+      "features": [
+        "Doorstep Personal Training",
+        "Training at Your Home or Gym",
+        "Customized Workout Plan",
+        "Diet Plan and Guidance",
+        "Exercise Form Correction & Tracking"
+      ],
+      "knowMore": {
+        "headline": "Your Personal Trainer Comes to You",
+        "story": "Busy schedule? Long working hours? No time to travel to the gym? Now, you don't need to compromise on your fitness goals.\n\nI will come to your home or your preferred gym and provide one-on-one personal training according to your fitness goals.",
+        "whatYouGet": [
+          {
+            "title": "Doorstep Personal Training",
+            "desc": "Your trainer comes to your home or preferred gym, saving your travel time."
+          },
+          {
+            "title": "Personal Attention",
+            "desc": "Get direct guidance and supervision during your training sessions."
+          },
+          {
+            "title": "Customized Workout Plan",
+            "desc": "Training structured around your fitness goals and current fitness level."
+          },
+          {
+            "title": "Diet Plan and Guidance",
+            "desc": "Nutrition guidance to support your fitness journey."
+          },
+          {
+            "title": "Exercise Form Correction",
+            "desc": "Learn proper exercise techniques and movement patterns."
+          },
+          {
+            "title": "Progress Tracking",
+            "desc": "Monitor your fitness progress and make adjustments when required."
+          },
+          {
+            "title": "Goal-Based Training",
+            "desc": "Training focused on fat loss, muscle building, strength or general fitness."
+          },
+          {
+            "title": "Time-Saving Convenience",
+            "desc": "No need to commute to a gym or wait for equipment."
+          },
+          {
+            "title": "Consistent Accountability",
+            "desc": "Stay committed with a trainer guiding your sessions."
+          }
+        ],
+        "whoIsThisFor": [
+          "Busy professionals with limited free time.",
+          "People who prefer training at home.",
+          "Beginners who need personal supervision.",
+          "People who want structured one-on-one training."
+        ],
+        "validity": "Monthly package. Session frequency and total sessions to be confirmed before publishing.",
+        "ctaText": "Start Your Personal Training Journey"
+      }
+    },
+    {
+      "id": "premium-online-coaching",
+      "title": "Premium 1:1 Online Coaching",
+      "cat": "Personal Coaching",
       "icon": "Laptop",
-      "title": "Online Coaching",
-      "tag": "Train from anywhere with expert 1-on-1 guidance and weekly check-ins.",
-      "weeks": "Flexible",
-      "level": "All Levels",
       "img": "/images/online.jpg",
-      "from": 1999,
-      "featured": true,
-      "features": [
-        "Personalized workout & diet plan",
-        "Weekly check-ins & adjustments",
-        "Daily WhatsApp chat support",
-        "Video form correction"
-      ]
-    },
-    {
-      "id": "muscle",
-      "cat": "Muscle Building",
-      "icon": "Trophy",
-      "title": "Muscle Building Program",
-      "tag": "Build solid lean muscle, raw strength and aesthetic shape naturally.",
-      "weeks": "12+ Weeks",
-      "level": "Beginner–Advanced",
-      "img": "/images/muscle.jpg",
-      "from": 2499,
-      "featured": true,
-      "features": [
-        "Hypertrophy progressive training",
-        "High-protein Indian meal plan",
-        "Form & biomechanics guidance",
-        "Strength milestone tracking"
-      ]
-    },
-    {
-      "id": "fat-loss",
-      "cat": "Fat Loss",
-      "icon": "Flame",
-      "title": "Fat Loss Program",
-      "tag": "Burn stubborn fat, get lean and build sustainable lifelong habits.",
-      "weeks": "8–24 Weeks",
+      "price": 12999,
+      "priceFormatted": "\u20b912,999",
+      "pricePeriod": "/month",
+      "from": 12999,
+      "weeks": "Monthly",
       "level": "All Levels",
-      "img": "/images/fat-loss.jpg",
-      "from": 1999,
-      "featured": true,
+      "validity": "Monthly package.",
+      "tagline": "Your Personal Coach, Wherever You Are.",
+      "tag": "Your Personal Coach, Wherever You Are.",
+      "shortDesc": "Get personalized fitness coaching from anywhere. From daily live workout sessions to nutrition planning and progress tracking, receive structured guidance to help you stay consistent and work towards your goals.",
+      "keyFeatures": [
+        "Personalized Diet Plan",
+        "Daily 1-Hour Live Personal Training",
+        "Daily Progress Tracking",
+        "Blood Report Review and Nutrition Guidance",
+        "Regular Plan Updates and WhatsApp Support"
+      ],
       "features": [
-        "Targeted fat-burn workout routine",
-        "Flexible Indian calorie-deficit diet",
-        "Weekly body recomposition checks",
-        "Metabolic recovery guidance"
-      ]
+        "Personalized Diet Plan",
+        "Daily 1-Hour Live Personal Training",
+        "Daily Progress Tracking",
+        "Blood Report Review & Nutrition",
+        "Regular Plan Updates & WhatsApp Support"
+      ],
+      "knowMore": {
+        "headline": "Premium Fitness Coaching Designed Around You",
+        "story": "You don't need to figure out your diet and workouts alone. Get personal coaching, structured training and regular accountability without having to visit a gym.",
+        "whatYouGet": [
+          {
+            "title": "Personalized Diet Plan",
+            "desc": "A nutrition plan based on your goals, routine, dietary needs and lifestyle."
+          },
+          {
+            "title": "Daily Live Personal Training",
+            "desc": "One-hour live one-on-one workout sessions every day."
+          },
+          {
+            "title": "Customized Workout Programming",
+            "desc": "Training based on your fitness level, goals and available equipment."
+          },
+          {
+            "title": "Daily Progress Tracking",
+            "desc": "Track workouts, weight trends, measurements and adherence."
+          },
+          {
+            "title": "Blood Report Review",
+            "desc": "Review relevant blood reports for nutrition planning, with medical concerns referred to a qualified clinician."
+          },
+          {
+            "title": "Regular Diet Plan Updates",
+            "desc": "Adjust your nutrition plan according to your progress and adherence."
+          },
+          {
+            "title": "Workout Plan Updates",
+            "desc": "Modify training based on progress, recovery and performance."
+          },
+          {
+            "title": "Direct WhatsApp Support",
+            "desc": "Get coaching-related guidance and assistance."
+          },
+          {
+            "title": "Goal-Based Coaching",
+            "desc": "Structured support for fat loss, muscle building, strength and general fitness."
+          },
+          {
+            "title": "Accountability and Consistency",
+            "desc": "Regular check-ins to help you stay committed to your plan."
+          }
+        ],
+        "whoIsThisFor": [
+          "Busy professionals who need structured guidance.",
+          "People who prefer training from home.",
+          "Beginners who need regular supervision.",
+          "Individuals who want personalized nutrition and workout coaching.",
+          "People who struggle with consistency and accountability."
+        ],
+        "validity": "Monthly package.",
+        "ctaText": "Apply for Premium 1:1 Coaching"
+      }
+    },
+    {
+      "id": "online-group-coaching",
+      "title": "Online Group Coaching",
+      "cat": "Personal Coaching",
+      "icon": "Users",
+      "img": "/images/group.jpg",
+      "price": 6000,
+      "priceFormatted": "\u20b96,000",
+      "pricePeriod": "/month",
+      "from": 6000,
+      "weeks": "Monthly",
+      "level": "Small Group (Max 5)",
+      "validity": "Monthly package. Live session schedule to be confirmed.",
+      "tagline": "Train Together. Stay Accountable.",
+      "tag": "Train Together. Stay Accountable.",
+      "shortDesc": "Get expert fitness guidance in a small online group of maximum five members. Follow live workouts, receive diet guidance and stay accountable with regular progress check-ins.",
+      "keyFeatures": [
+        "Diet Guidance",
+        "Live Group Workout Sessions",
+        "Maximum 5 Members per Group",
+        "Weekly Group Check-ins",
+        "Progress Tracking and Private WhatsApp Group Support"
+      ],
+      "features": [
+        "Diet Guidance",
+        "Live Group Workout Sessions",
+        "Maximum 5 Members per Group",
+        "Weekly Group Check-ins",
+        "Private WhatsApp Group Support"
+      ],
+      "knowMore": {
+        "headline": "Small Group. Expert Guidance. Better Accountability.",
+        "story": "Want professional coaching without the cost of one-on-one training? Join a small online fitness group where you can train with others, follow a structured routine and receive regular guidance.",
+        "whatYouGet": [
+          {
+            "title": "Diet Guidance",
+            "desc": "Practical nutrition guidance to support your fitness goals."
+          },
+          {
+            "title": "Live Group Workouts",
+            "desc": "Participate in live workout sessions with your coach."
+          },
+          {
+            "title": "Maximum 5 Members",
+            "desc": "Small groups for a more focused coaching experience."
+          },
+          {
+            "title": "Weekly Group Check-ins",
+            "desc": "Review progress and discuss challenges."
+          },
+          {
+            "title": "Progress Tracking",
+            "desc": "Track your progress and consistency."
+          },
+          {
+            "title": "Private WhatsApp Group",
+            "desc": "Receive group updates and coaching-related support."
+          },
+          {
+            "title": "Structured Workout Routine",
+            "desc": "Follow an organized training schedule."
+          },
+          {
+            "title": "Group Accountability",
+            "desc": "Stay motivated by training alongside other members."
+          }
+        ],
+        "whoIsThisFor": [
+          "People who enjoy training with others.",
+          "Clients who want regular coaching at a lower price than private coaching.",
+          "Beginners who need structure and accountability.",
+          "People who want to build consistent fitness habits."
+        ],
+        "validity": "Monthly package. Live session schedule to be confirmed.",
+        "ctaText": "Join the Group Coaching Program"
+      }
+    },
+    {
+      "id": "recorded-weight-loss",
+      "title": "Recorded Weight Loss Workout Program",
+      "cat": "Workout Programs",
+      "icon": "Flame",
+      "img": "/images/fat-loss.jpg",
+      "price": 1999,
+      "priceFormatted": "\u20b91,999",
+      "pricePeriod": "for 30 Days",
+      "from": 1999,
+      "weeks": "30 Days",
+      "level": "Beginner Friendly",
+      "validity": "30 Days",
+      "tagline": "Follow the Program. Build the Habit.",
+      "tag": "Follow the Program. Build the Habit.",
+      "shortDesc": "Follow a structured 30-day weight loss workout program with recorded exercise videos and clear workout instructions. Train independently and build consistency at your own pace.",
+      "keyFeatures": [
+        "Recorded Weight Loss Workout Videos",
+        "Structured 30-Day Workout Calendar",
+        "Exercise Demonstration Videos",
+        "Beginner-Friendly Workout Guidance",
+        "Workout Sequencing and Session Instructions"
+      ],
+      "features": [
+        "Recorded Weight Loss Workout Videos",
+        "Structured 30-Day Workout Calendar",
+        "Exercise Demonstration Videos",
+        "Beginner-Friendly Workout Guidance",
+        "Workout Sequencing & Instructions"
+      ],
+      "knowMore": {
+        "headline": "Your 30-Day Workout Program Starts Here",
+        "story": "Stop guessing which exercises to do every day. Follow a structured workout calendar with recorded demonstrations and clear instructions to help you stay consistent.",
+        "whatYouGet": [
+          {
+            "title": "Recorded Workout Videos",
+            "desc": "Follow pre-recorded workout sessions."
+          },
+          {
+            "title": "30-Day Workout Calendar",
+            "desc": "Follow a structured schedule throughout the program."
+          },
+          {
+            "title": "Exercise Demonstrations",
+            "desc": "Learn how exercises are performed through video demonstrations."
+          },
+          {
+            "title": "Beginner-Friendly Guidance",
+            "desc": "Understand the basics of following your workout routine."
+          },
+          {
+            "title": "Workout Sequencing",
+            "desc": "Know which exercises to perform and in what order."
+          },
+          {
+            "title": "Self-Paced Training",
+            "desc": "Follow the program at a convenient time."
+          },
+          {
+            "title": "Repeatable Demonstrations",
+            "desc": "Rewatch exercise videos when needed."
+          },
+          {
+            "title": "Structured Routine",
+            "desc": "Build consistency through a planned workout schedule."
+          }
+        ],
+        "whoIsThisFor": [
+          "People starting their weight loss journey.",
+          "Beginners who need a structured workout routine.",
+          "People who prefer recorded workout guidance.",
+          "Individuals who can train independently."
+        ],
+        "important": "This is a recorded workout program. Live personal training and personalized diet coaching are not included.",
+        "validity": "30 Days",
+        "ctaText": "Get the 30-Day Workout Program"
+      }
+    },
+    {
+      "id": "recorded-muscle-building",
+      "title": "Recorded Muscle Building Workout Program",
+      "cat": "Workout Programs",
+      "icon": "Trophy",
+      "img": "/images/muscle.jpg",
+      "price": 1999,
+      "priceFormatted": "\u20b91,999",
+      "pricePeriod": "for 30 Days",
+      "from": 1999,
+      "weeks": "30 Days",
+      "level": "Beginner\u2013Intermediate",
+      "validity": "30 Days",
+      "tagline": "Build Strength With a Structured Plan.",
+      "tag": "Build Strength With a Structured Plan.",
+      "shortDesc": "Follow a structured muscle-building workout program with recorded exercise demonstrations, workout splits and clear sets-and-repetitions guidance.",
+      "keyFeatures": [
+        "Recorded Muscle Building Workout Videos",
+        "Structured Workout Split",
+        "Exercise Demonstration Videos",
+        "Sets, Reps and Rest-Period Guidance",
+        "Beginner-to-Intermediate Workout Programming"
+      ],
+      "features": [
+        "Recorded Muscle Building Workout Videos",
+        "Structured Workout Split",
+        "Exercise Demonstration Videos",
+        "Sets, Reps & Rest-Period Guidance",
+        "Beginner-to-Intermediate Programming"
+      ],
+      "knowMore": {
+        "headline": "Train With Structure. Build Strength Consistently.",
+        "story": "Build a consistent resistance-training routine with a structured workout program designed for beginner-to-intermediate trainees.",
+        "whatYouGet": [
+          {
+            "title": "Recorded Workout Videos",
+            "desc": "Follow pre-recorded muscle-building workout sessions."
+          },
+          {
+            "title": "Structured Workout Split",
+            "desc": "Follow an organized training schedule."
+          },
+          {
+            "title": "Exercise Demonstrations",
+            "desc": "Learn exercise movements through recorded videos."
+          },
+          {
+            "title": "Sets and Repetitions",
+            "desc": "Follow the prescribed sets and repetitions for each exercise."
+          },
+          {
+            "title": "Rest-Period Guidance",
+            "desc": "Understand the recommended rest intervals between sets."
+          },
+          {
+            "title": "Progressive Training Basics",
+            "desc": "Learn how to approach training progression."
+          },
+          {
+            "title": "Beginner-to-Intermediate Programming",
+            "desc": "Follow a structured routine appropriate to your training experience."
+          },
+          {
+            "title": "Self-Paced Access",
+            "desc": "Follow the recorded program during its validity period."
+          }
+        ],
+        "whoIsThisFor": [
+          "Beginners starting resistance training.",
+          "Individuals looking to build muscle and strength.",
+          "People who prefer recorded workout instructions.",
+          "Trainees who can follow a structured program independently."
+        ],
+        "important": "This package includes recorded workout content, not live personal training or a personalized diet plan.",
+        "validity": "30 Days",
+        "ctaText": "Get the Muscle Building Program"
+      }
+    },
+    {
+      "id": "premium-diet-plan",
+      "title": "Premium Personalized Diet Plan",
+      "cat": "Diet & Nutrition",
+      "icon": "Utensils",
+      "img": "/images/diet.jpg",
+      "price": 3999,
+      "priceFormatted": "\u20b93,999",
+      "pricePeriod": "for 30 Days",
+      "from": 3999,
+      "weeks": "30 Days",
+      "level": "100% Customized",
+      "validity": "30 Days",
+      "tagline": "Your Goals. Your Lifestyle. Your Personalized Nutrition Plan.",
+      "tag": "Your Goals. Your Lifestyle. Your Personalized Nutrition Plan.",
+      "shortDesc": "Get a premium personalized nutrition plan designed around your fitness goals, daily routine, dietary preferences and nutritional requirements. Receive structured meal planning, precise food quantities and ongoing progress-based guidance.",
+      "keyFeatures": [
+        "Personalized Diet Plan",
+        "Exact Food Quantities and Portion Guidance",
+        "Food Preferences and Dietary Requirements Considered",
+        "Meal Timing and Practical Food Substitutions",
+        "Progress Review and Diet Adjustments"
+      ],
+      "features": [
+        "Personalized Diet Plan",
+        "Exact Food Quantities & Portion Guidance",
+        "Food Preferences & Dietary Requirements",
+        "Meal Timing & Practical Food Substitutions",
+        "Progress Review & Diet Adjustments"
+      ],
+      "knowMore": {
+        "headline": "Premium Nutrition Coaching Designed Around You",
+        "story": "Your nutrition plan should fit your lifestyle, routine and fitness goals. Get personalized dietary guidance with clear quantities, practical meal options and structured progress reviews.",
+        "whatYouGet": [
+          {
+            "title": "Personalized Nutrition Assessment",
+            "desc": "Review your goals, routine, food preferences and dietary requirements."
+          },
+          {
+            "title": "Customized Diet Plan",
+            "desc": "A nutrition plan designed around your individual needs."
+          },
+          {
+            "title": "Precise Food Quantities",
+            "desc": "Clear serving sizes and portion guidance."
+          },
+          {
+            "title": "Flexible Meal Options",
+            "desc": "Practical food alternatives based on your dietary preferences."
+          },
+          {
+            "title": "Meal Timing Guidance",
+            "desc": "Organize meals around your daily schedule."
+          },
+          {
+            "title": "Goal-Based Nutrition",
+            "desc": "Support for fat loss, muscle building or general fitness."
+          },
+          {
+            "title": "Progress Review",
+            "desc": "Review adherence and progress during the program."
+          },
+          {
+            "title": "Diet Adjustments",
+            "desc": "Update the plan based on progress and practical requirements."
+          },
+          {
+            "title": "Ongoing Nutrition Guidance",
+            "desc": "Support in following your nutrition plan consistently."
+          }
+        ],
+        "whoIsThisFor": [
+          "People who want a personalized nutrition plan.",
+          "Individuals looking for structured dietary guidance.",
+          "Clients who need practical meal planning around their routine.",
+          "People working towards specific fitness goals."
+        ],
+        "validity": "30 Days",
+        "ctaText": "Get Your Premium Diet Plan"
+      }
+    },
+    {
+      "id": "fatty-liver-nutrition",
+      "title": "Fatty Liver Nutrition Guidance",
+      "cat": "Diet & Nutrition",
+      "icon": "HeartPulse",
+      "img": "/images/fat-loss.jpg",
+      "price": 4999,
+      "priceFormatted": "\u20b94,999",
+      "pricePeriod": "for 30 Days",
+      "from": 4999,
+      "weeks": "30 Days",
+      "level": "Lifestyle Plan",
+      "validity": "30 Days",
+      "tagline": "Better Eating Habits for Better Liver Health.",
+      "tag": "Better Eating Habits for Better Liver Health.",
+      "shortDesc": "A ready-made nutrition guidance plan for individuals with fatty liver, focused on balanced eating, portion awareness and healthy lifestyle habits alongside appropriate medical care.",
+      "keyFeatures": [
+        "Fatty Liver-Focused Nutrition Guidance",
+        "Balanced Diet Plan",
+        "Food Quantity and Portion Guidance",
+        "Guidance on Added Sugar and Excess Calories",
+        "General Healthy Lifestyle Instructions"
+      ],
+      "features": [
+        "Fatty Liver-Focused Nutrition Guidance",
+        "Balanced Diet Plan",
+        "Food Quantity & Portion Guidance",
+        "Guidance on Sugar & Excess Calories",
+        "General Healthy Lifestyle Instructions"
+      ],
+      "knowMore": {
+        "headline": "Nutrition Guidance for Fatty Liver",
+        "story": "Building healthier eating habits can support overall liver health. This affordable plan provides general dietary guidance for individuals with fatty liver alongside advice from their treating healthcare professional.",
+        "whatYouGet": [
+          {
+            "title": "Fatty Liver Nutrition Guidance",
+            "desc": "General dietary guidance focused on healthier eating habits."
+          },
+          {
+            "title": "Balanced Diet Structure",
+            "desc": "Guidance on including a variety of nutritious foods."
+          },
+          {
+            "title": "Food Quantity Guidance",
+            "desc": "Practical portion awareness for daily meals."
+          },
+          {
+            "title": "Added Sugar Awareness",
+            "desc": "Guidance on limiting excess added sugar and sugary drinks."
+          },
+          {
+            "title": "Calorie Awareness",
+            "desc": "General guidance on avoiding excessive calorie intake."
+          },
+          {
+            "title": "Healthy Eating Habits",
+            "desc": "Practical instructions for improving daily food choices."
+          },
+          {
+            "title": "Lifestyle Guidance",
+            "desc": "General healthy lifestyle recommendations."
+          },
+          {
+            "title": "30-Day Plan Access",
+            "desc": "Access to the plan for the stated validity period."
+          }
+        ],
+        "whoIsThisFor": [
+          "Individuals with diagnosed fatty liver seeking general nutrition guidance.",
+          "People who want to improve their daily eating habits.",
+          "Individuals looking for an affordable starting point for healthier nutrition."
+        ],
+        "important": "This is a general nutrition guidance product, not a personalized medical diet or treatment for fatty liver. Medical assessment and treatment should be managed by a qualified healthcare professional.",
+        "validity": "30 Days",
+        "ctaText": "Get Your Fatty Liver Nutrition Guide"
+      }
+    },
+    {
+      "id": "premade-diet-workout",
+      "title": "Pre-Made Diet + Workout Plan",
+      "cat": "Starter Plans",
+      "icon": "Target",
+      "img": "/images/muscle.jpg",
+      "price": 499,
+      "priceFormatted": "\u20b9499",
+      "pricePeriod": "for 30 Days",
+      "from": 499,
+      "weeks": "30 Days",
+      "level": "Beginner Starter",
+      "validity": "30 Days",
+      "tagline": "Your Simple Starting Point for Fitness.",
+      "tag": "Your Simple Starting Point for Fitness.",
+      "shortDesc": "Get a ready-made diet and workout plan with structured meals, exercise instructions and a simple routine to help you start your fitness journey.",
+      "keyFeatures": [
+        "Ready-Made Weight Loss Diet Plan",
+        "Structured Workout Plan",
+        "Exercises With Sets and Repetitions",
+        "Pre-Defined Diet and Workout Routine",
+        "General Program Instructions"
+      ],
+      "features": [
+        "Ready-Made Weight Loss Diet Plan",
+        "Structured Workout Plan",
+        "Exercises With Sets & Repetitions",
+        "Pre-Defined Daily Schedule",
+        "General Program Instructions"
+      ],
+      "knowMore": {
+        "headline": "A Simple Plan to Start Your Fitness Journey",
+        "story": "Follow a ready-made diet and workout routine without the cost of personalized coaching.",
+        "whatYouGet": [
+          {
+            "title": "Ready-Made Weight Loss Diet Plan",
+            "desc": "Clear structure for your daily meals."
+          },
+          {
+            "title": "Structured Workout Routine",
+            "desc": "Organized routine to follow each week."
+          },
+          {
+            "title": "Exercise List With Sets and Reps",
+            "desc": "Prescribed sets and repetitions for every exercise."
+          },
+          {
+            "title": "Pre-Defined Meal and Workout Schedule",
+            "desc": "Understand timing and daily routines."
+          },
+          {
+            "title": "General Program Instructions",
+            "desc": "Easy instructions for following the program."
+          }
+        ],
+        "whoIsThisFor": [
+          "People looking for an affordable start to fitness.",
+          "Beginners needing simple direction for diet and training.",
+          "Anyone who prefers an organized pre-made guide."
+        ],
+        "important": "This is a non-personalized plan. Individual consultations and customized modifications are not included.",
+        "validity": "30 Days",
+        "ctaText": "Get Your Diet + Workout Plan"
+      }
+    },
+    {
+      "id": "premade-weight-loss-diet",
+      "title": "Pre-Made Weight Loss Diet Plan",
+      "cat": "Starter Plans",
+      "icon": "Gift",
+      "img": "/images/online.jpg",
+      "price": 499,
+      "priceFormatted": "\u20b9499",
+      "pricePeriod": "for 30 Days",
+      "from": 499,
+      "weeks": "30 Days",
+      "level": "Beginner Starter",
+      "validity": "30 Days",
+      "tagline": "Start Your Weight Loss Journey.",
+      "tag": "Start Your Weight Loss Journey.",
+      "shortDesc": "Get a ready-made weight loss diet plan with pre-defined meals, food quantities and simple instructions to help organize your daily eating routine.",
+      "keyFeatures": [
+        "Ready-Made Weight Loss Diet Plan",
+        "Food Quantities and Portion Guidance",
+        "Pre-Defined Meal Structure",
+        "Standard Meal Timings",
+        "General Weight Loss Nutrition Instructions"
+      ],
+      "features": [
+        "Ready-Made Weight Loss Diet Plan",
+        "Food Quantities & Portion Guidance",
+        "Pre-Defined Meal Structure",
+        "Suggested Meal Timings",
+        "General Weight Loss Instructions"
+      ],
+      "knowMore": {
+        "headline": "A Simple and Affordable Diet Plan",
+        "story": "Start with a ready-made diet plan that provides a clear structure for your daily meals and food portions.",
+        "whatYouGet": [
+          {
+            "title": "Ready-Made Weight Loss Diet Plan",
+            "desc": "Structured meal plan focused on calorie deficit."
+          },
+          {
+            "title": "Food Quantities and Portion Guidance",
+            "desc": "Clear portion sizes for everyday foods."
+          },
+          {
+            "title": "Pre-Defined Meals and Structure",
+            "desc": "Breakfast, lunch, dinner and snack suggestions."
+          },
+          {
+            "title": "Suggested Meal Timings",
+            "desc": "Optimal timing windows to prevent energy crashes."
+          },
+          {
+            "title": "General Instructions for Following the Plan",
+            "desc": "Practical tips to stay consistent."
+          }
+        ],
+        "whoIsThisFor": [
+          "Anyone starting a weight loss journey on a budget.",
+          "People who want structured meals and portion guidance.",
+          "Individuals who can follow a standard plan independently."
+        ],
+        "important": "This is a standard, non-personalized diet plan. Individual consultations and custom modifications are not included.",
+        "validity": "30 Days",
+        "ctaText": "Get Your Weight Loss Diet Plan"
+      }
     }
   ],
   "plans": [
@@ -100,7 +734,7 @@
       "id": "personal",
       "name": "Personal Training",
       "price": 4999,
-      "duration": "8–24 Weeks",
+      "duration": "8\u201324 Weeks",
       "workout": true,
       "diet": true,
       "support": "1-on-1 Support",
@@ -112,7 +746,7 @@
       "id": "diet",
       "name": "Diet Plan",
       "price": 999,
-      "duration": "4–24 Weeks",
+      "duration": "4\u201324 Weeks",
       "workout": false,
       "diet": true,
       "support": "Chat Support",
@@ -124,7 +758,7 @@
       "id": "complete",
       "name": "Complete Transformation",
       "price": 6999,
-      "duration": "12–24 Weeks",
+      "duration": "12\u201324 Weeks",
       "workout": true,
       "diet": true,
       "support": "Priority Support",
@@ -178,9 +812,13 @@
   "headTrainer": {
     "id": 1,
     "name": "Shivam",
-    "badge": "HEAD TRAINER & FOUNDER",
-    "role": "HEAD TRAINER & FOUNDER",
-    "tags": ["Head Coach", "Founder", "Master Trainer"],
+    "badge": "Master Coach",
+    "role": "Master Coach",
+    "tags": [
+      "Master Coach",
+      "Founder",
+      "Strength & Nutrition"
+    ],
     "img": "/foundercoach/shivamsingh.png",
     "featured": true,
     "bio": "Helping people build a stronger, healthier and more confident version of themselves through scientifically backed training and sustainable Indian nutrition.",
@@ -198,7 +836,11 @@
       "badge": "STRENGTH TRAINER",
       "badgeIcon": "Dumbbell",
       "role": "STRENGTH & CONDITIONING",
-      "tags": ["Strength Training", "Conditioning", "Endurance"],
+      "tags": [
+        "Strength Training",
+        "Conditioning",
+        "Endurance"
+      ],
       "img": "https://randomuser.me/api/portraits/men/32.jpg",
       "bio": "Build strength, improve endurance and become your best self.",
       "socials": {
@@ -213,7 +855,11 @@
       "badge": "FEMALE TRAINER",
       "badgeIcon": "User",
       "role": "WEIGHT LOSS & WOMEN FITNESS",
-      "tags": ["Weight Loss", "Women Fitness", "Body Toning"],
+      "tags": [
+        "Weight Loss",
+        "Women Fitness",
+        "Body Toning"
+      ],
       "img": "https://randomuser.me/api/portraits/women/44.jpg",
       "bio": "Specialized in weight loss, toning and women's fitness programs.",
       "socials": {
@@ -228,7 +874,11 @@
       "badge": "NUTRITION EXPERT",
       "badgeIcon": "Utensils",
       "role": "NUTRITION & DIET PLANS",
-      "tags": ["Diet Planning", "Nutrition", "Meal Prep"],
+      "tags": [
+        "Diet Planning",
+        "Nutrition",
+        "Meal Prep"
+      ],
       "img": "https://randomuser.me/api/portraits/men/75.jpg",
       "bio": "Customized diet plans for a healthier and stronger you.",
       "socials": {
@@ -477,4 +1127,3 @@
     }
   ]
 }
-

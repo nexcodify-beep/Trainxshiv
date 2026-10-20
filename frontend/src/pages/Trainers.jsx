@@ -10,7 +10,6 @@ import {
   Target,
   Crown,
   Trophy,
-  Star,
   Award,
   MessageCircle,
   MessageSquare,
@@ -20,10 +19,10 @@ import {
   Instagram,
   Youtube,
   Mail,
-  X,
-  ClipboardList,
-  FlaskConical,
   Check,
+  ExternalLink,
+  Flame,
+  Sparkles,
 } from 'lucide-react';
 import { HEAD_TRAINER as DEFAULT_HEAD, BRAND as DEFAULT_BRAND, TEAM_TRAINERS as DEFAULT_TEAM } from '../data';
 import { useModal, useContent } from '../context';
@@ -35,131 +34,109 @@ export default function Trainers() {
   const BRAND = dynamicBrand || DEFAULT_BRAND;
   const TEAM_TRAINERS = dynamicTeam || DEFAULT_TEAM;
 
-  const [videoModalOpen, setVideoModalOpen] = useState(false);
-  const [activeSlide, setActiveSlide] = useState(0);
+  const [activeCert, setActiveCert] = useState(0);
 
-  // Client transformation data directly matching the reference design
-  const CLIENT_TRANSFORMS = [
+  // Certificates for slider - placeholder cards ready for certificate photos
+  const CERTIFICATES = [
     {
       id: 1,
-      name: 'Amit Kumar',
-      sublabel: 'Lost 12 KG • Gained Strength',
-      tagline: '4 MONTHS TRANSFORMATION',
-      img: '/images/transformations/ba7.png',
-      tag1: '⬇ -12 KG Weight Loss',
-      tag1Type: 'loss',
-      tag2: '⬆ +8 KG Muscle Gain',
-      tag2Type: 'gain',
+      title: 'ISSA Certified Fitness Trainer (CFT)',
+      org: 'International Sports Sciences Association',
+      badge: 'Certified Master Trainer',
+      year: 'Accredited',
+      desc: 'Expertise in biomechanics, progressive overload strength training and injury-free exercise mechanics.',
+      icon: Award,
+      accent: '#FFD700',
     },
     {
       id: 2,
-      name: 'Rohit Verma',
-      sublabel: 'Fat to Fit Transformation',
-      tagline: '4 MONTHS TRANSFORMATION',
-      img: '/images/transformations/ba8.png',
-      tag1: '⬇ -10 KG Weight Loss',
-      tag1Type: 'loss',
-      tag2: '⬆ +6 KG Muscle Gain',
-      tag2Type: 'gain',
+      title: 'Certified Nutrition & Diet Planning',
+      org: 'Sports Nutrition & Macronutrient Specialist',
+      badge: 'Certified Nutritionist',
+      year: 'Accredited',
+      desc: 'Custom macro calculation, flexible Indian diet planning, fat loss & muscle building meal structures.',
+      icon: Dumbbell,
+      accent: '#22C55E',
     },
     {
       id: 3,
-      name: 'Rahul Mishra',
-      sublabel: 'Lean Physique & Better Posture',
-      tagline: '4 MONTHS TRANSFORMATION',
-      img: '/images/transformations/b9.png',
-      tag1: '⬇ -8 KG Weight Loss',
-      tag1Type: 'loss',
-      tag2: '⬆ +6 KG Muscle Gain',
-      tag2Type: 'gain',
+      title: 'Transformation & Fat Loss Specialist',
+      org: 'Physique Transformation Academy',
+      badge: 'Body Recomposition Specialist',
+      year: 'Accredited',
+      desc: 'Proven protocol for sustained fat loss, metabolic recovery and natural body recomposition.',
+      icon: Flame,
+      accent: '#F97316',
     },
     {
       id: 4,
-      name: 'Vikas Yadav',
-      sublabel: 'Mass Gain Transformation',
-      tagline: '6 MONTHS TRANSFORMATION',
-      img: '/images/transformations/b10.png',
-      tag1: '⬆ +14 KG Muscle Gain',
-      tag1Type: 'gain',
-      tag2: '⬇ -6% Body Fat',
-      tag2Type: 'loss',
+      title: 'Muscle Building & Strength Training',
+      org: 'Hypertrophy & Strength Conditioning',
+      badge: 'Hypertrophy Specialist',
+      year: 'Accredited',
+      desc: 'Science-based progressive programming for natural muscle gain, strength milestones & posture.',
+      icon: Target,
+      accent: '#3B82F6',
+    },
+    {
+      id: 5,
+      title: 'Lifestyle & Mindset Coaching',
+      org: 'Behavioral Habit Transformation',
+      badge: 'Mindset & Lifestyle Coach',
+      year: 'Accredited',
+      desc: 'Building sustainable lifelong fitness habits without restrictive or unrealistic crash diets.',
+      icon: Sparkles,
+      accent: '#A855F7',
     },
   ];
 
-  const nextTransform = () => {
-    setActiveSlide((prev) => (prev + 1) % CLIENT_TRANSFORMS.length);
+  const nextCert = () => {
+    setActiveCert((prev) => (prev + 1) % CERTIFICATES.length);
   };
 
-  const prevTransform = () => {
-    setActiveSlide((prev) => (prev - 1 + CLIENT_TRANSFORMS.length) % CLIENT_TRANSFORMS.length);
+  const prevCert = () => {
+    setActiveCert((prev) => (prev - 1 + CERTIFICATES.length) % CERTIFICATES.length);
   };
 
   return (
     <div className="about-trainer-page">
       {/* ========================================================
-          1. HERO SECTION: MEET SHIVAN — THE VISIONARY BEHIND TRAINXSHIV
+          1. HERO SECTION: MEET SHIVAN — MASTER COACH
       ======================================================== */}
       <section className="about-trainer-hero">
         <div className="container about-hero-container">
-          {/* Left Column: Hero Copy & Feature Pills */}
+          {/* Left Column: Introduction & Story */}
           <div className="about-hero-copy">
             <div className="about-hero-badge">
-              <User size={14} className="text-blue" />
-              <span>Founder &amp; Head Coach</span>
+              <Crown size={14} className="text-yellow" />
+              <span>Master Coach</span>
             </div>
 
             <h1 className="about-hero-title">
-              Meet <span className="text-blue">Shivan</span> — The Visionary Behind{' '}
-              <span className="text-blue">TrainXShiv</span>
+              Meet <span className="text-yellow">Shivan</span> — Master Coach Behind{' '}
+              <span className="text-yellow">TrainXShiv</span>
             </h1>
 
             <p className="about-hero-desc">
-              From struggling with gains, to transforming into a stronger and healthier version of myself — now
-              helping people achieve their own transformation through science-based training, nutrition and
-              mindset coaching.
+              Hi, I'm Shivan, a certified fitness coach and founder of TrainXShiv. From struggling with gains, to
+              transforming into a stronger, leaner, and healthier version of myself — my mission is to help people
+              build a stronger and more confident version of themselves through science-based training, sustainable
+              nutrition and disciplined mindset coaching.
             </p>
 
-            {/* 4 Feature Badges */}
-            <div className="about-hero-features-grid">
-              <div className="about-feat-pill">
-                <ClipboardList size={15} className="text-blue" />
-                <span>Personalized Coaching</span>
+            <div className="about-hero-highlights">
+              <div className="about-hl-item">
+                <CheckCircle2 size={16} className="text-yellow" />
+                <span>ISSA Certified Fitness &amp; Sports Nutritionist</span>
               </div>
-              <div className="about-feat-pill">
-                <FlaskConical size={15} className="text-blue" />
-                <span>Science Based Approach</span>
+              <div className="about-hl-item">
+                <CheckCircle2 size={16} className="text-yellow" />
+                <span>7+ Years Experience &bull; 100% Natural Transformation</span>
               </div>
-              <div className="about-feat-pill">
-                <Target size={15} className="text-blue" />
-                <span>Sustainable Results</span>
+              <div className="about-hl-item">
+                <CheckCircle2 size={16} className="text-yellow" />
+                <span>500+ Successful Transformations Guided</span>
               </div>
-              <div className="about-feat-pill">
-                <MessageCircle size={15} className="text-blue" />
-                <span>Online &amp; Offline Support</span>
-              </div>
-            </div>
-
-            {/* Actions */}
-            <div className="about-hero-actions">
-              <button
-                type="button"
-                className="btn-about-primary"
-                onClick={() => open('enroll', { plan: '1-on-1 Consultation with Shivan' })}
-              >
-                <span>Book 1-on-1 Consultation</span>
-                <ArrowRight size={16} />
-              </button>
-
-              <button
-                type="button"
-                className="btn-about-watch"
-                onClick={() => setVideoModalOpen(true)}
-              >
-                <div className="watch-play-circle">
-                  <Play size={12} fill="#1D5BF0" className="text-blue" />
-                </div>
-                <span>Watch My Story</span>
-              </button>
             </div>
 
             {/* Social Proof Stack */}
@@ -183,14 +160,14 @@ export default function Trainers() {
                 />
               </div>
               <div className="proof-text">
-                <strong>500+</strong>
-                <span>Happy Transformations</span>
+                <strong>500+ Happy Clients</strong>
+                <span>100% Verified Transformations</span>
               </div>
             </div>
           </div>
 
-          {/* Right Column: Dual Before & After Visual Cards */}
-          <div className="about-hero-visual-wrapper">
+          {/* Right Column: Transformation Visual & Action Buttons Underneath */}
+          <div className="about-hero-visual-col">
             <div className="about-hero-visual">
               {/* Before Card */}
               <div className="hero-ba-card before-card">
@@ -249,12 +226,37 @@ export default function Trainers() {
                 </div>
               </div>
             </div>
+
+            {/* ACTION BUTTONS: Directly under the photo as requested */}
+            <div className="about-photo-actions">
+              <button
+                type="button"
+                className="btn-about-primary"
+                onClick={() => open('enroll', { plan: '1-on-1 Consultation with Master Coach Shivan' })}
+              >
+                <span>Book 1-on-1 Consultation</span>
+                <ArrowRight size={16} />
+              </button>
+
+              <a
+                href={BRAND.instagram || 'https://www.instagram.com/trainxshiv/'}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-about-watch"
+              >
+                <div className="watch-play-circle">
+                  <Play size={12} fill="#FFD700" className="text-yellow" />
+                </div>
+                <span>Watch My Story</span>
+                <ExternalLink size={13} className="ext-icon" />
+              </a>
+            </div>
           </div>
         </div>
       </section>
 
       {/* ========================================================
-          2. BLUE HIGHLIGHT STRIP (STATS BAR)
+          2. METRICS STRIP (7+ YEARS & 100% SUCCESS)
       ======================================================== */}
       <section className="about-blue-strip">
         <div className="container about-strip-grid">
@@ -299,7 +301,7 @@ export default function Trainers() {
               <Crown size={22} className="strip-ico" />
             </div>
             <div className="strip-meta">
-              <strong>10+ Years</strong>
+              <strong>7+ Years</strong>
               <span>Fitness Coaching Experience</span>
             </div>
           </div>
@@ -307,237 +309,130 @@ export default function Trainers() {
       </section>
 
       {/* ========================================================
-          3. ABOUT SHIVAN & CERTIFICATIONS (3-COLUMN SECTION)
+          3. CERTIFICATIONS & SPECIALIZATIONS (CAROUSEL SLIDER)
+          Placed directly under transformation photo section
       ======================================================== */}
-      <section className="about-founder-deep-section">
-        <div className="container about-founder-3col-grid">
-          {/* Column 1: Bio & 2x2 Mini Stats */}
-          <div className="founder-col-bio">
-            <span className="founder-eyebrow">FOUNDER OF TRAINXSHIV</span>
-            <h2 className="founder-col-title">
-              About <span className="text-blue">Shivan</span>
-            </h2>
-            <p className="founder-col-text">
-              Hi, I'm Shivan, a certified fitness coach and the founder of TrainXShiv. My mission is to help people
-              build a stronger, healthier and more confident version of themselves through personalized training,
-              nutrition guidance and a balanced lifestyle. I believe fitness is not just about looks, it's about
-              better energy, discipline and a happier life.
-            </p>
-
-            {/* 2x2 Mini Stats Grid */}
-            <div className="founder-mini-stats-grid">
-              <div className="mini-stat-box">
-                <Dumbbell size={18} className="mini-ico text-green" />
-                <div>
-                  <strong>500+</strong>
-                  <span>Clients Transformed</span>
-                </div>
-              </div>
-              <div className="mini-stat-box">
-                <Target size={18} className="mini-ico text-blue" />
-                <div>
-                  <strong>98%</strong>
-                  <span>Client Satisfaction</span>
-                </div>
-              </div>
-              <div className="mini-stat-box">
-                <Trophy size={18} className="mini-ico text-amber" />
-                <div>
-                  <strong>10+ Years</strong>
-                  <span>Coaching Experience</span>
-                </div>
-              </div>
-              <div className="mini-stat-box">
-                <Star size={18} className="mini-ico text-purple" />
-                <div>
-                  <strong>4.9/5</strong>
-                  <span>Average Rating</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Action Row */}
-            <div className="founder-col-actions">
-              <button
-                type="button"
-                className="btn-founder-consult"
-                onClick={() => open('enroll', { plan: 'Free Consultation with Shivan' })}
-              >
-                <span>Book a Free Consultation</span>
-                <ArrowRight size={15} />
-              </button>
-
-              <a
-                href={`https://wa.me/${BRAND.whatsapp || '917080263878'}?text=${encodeURIComponent(
-                  'Hi Shivan, I want to discuss my fitness transformation.'
-                )}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-founder-whatsapp"
-              >
-                <MessageCircle size={15} />
-                <span>Chat with Shivan</span>
-              </a>
-            </div>
-          </div>
-
-          {/* Column 2: Video Card with Center Play Button */}
-          <div className="founder-col-video">
-            <div
-              className="founder-video-card"
-              onClick={() => setVideoModalOpen(true)}
-              role="button"
-              tabIndex={0}
-              onKeyDown={(e) => e.key === 'Enter' && setVideoModalOpen(true)}
-              aria-label="Play Founder Story Video"
-            >
-              <img
-                src="/foundercoach/shivamsingh.png"
-                alt="Watch Founder Story"
-                className="founder-video-img"
-              />
-              <div className="video-card-overlay">
-                <button type="button" className="video-center-play-btn" aria-label="Play Video">
-                  <Play size={20} fill="#1D5BF0" className="text-blue" />
-                </button>
-                <div className="video-meta-bottom">
-                  <h4>Watch Founder's Story</h4>
-                  <span>2:36 min</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Column 3: Certifications & Specializations */}
-          <div className="founder-col-certs">
-            <div className="certs-card">
-              <div className="certs-card-header">
-                <Award size={18} className="text-blue" />
-                <h3>Certifications &amp; Specializations</h3>
-              </div>
-
-              <div className="certs-list">
-                <div className="cert-item">
-                  <CheckCircle2 size={18} className="cert-check" />
-                  <div>
-                    <h4>ISSA Certified Fitness Trainer (CFT)</h4>
-                    <p>International Sports Sciences Association</p>
-                  </div>
-                </div>
-
-                <div className="cert-item">
-                  <CheckCircle2 size={18} className="cert-check" />
-                  <div>
-                    <h4>Certified Nutrition &amp; Diet Planning</h4>
-                    <p>Personalized Diet Plans For All Goals</p>
-                  </div>
-                </div>
-
-                <div className="cert-item">
-                  <CheckCircle2 size={18} className="cert-check" />
-                  <div>
-                    <h4>Transformation &amp; Fat Loss Specialist</h4>
-                    <p>Specialist in Natural &amp; Sustainable Results</p>
-                  </div>
-                </div>
-
-                <div className="cert-item">
-                  <CheckCircle2 size={18} className="cert-check" />
-                  <div>
-                    <h4>Muscle Building &amp; Strength Training</h4>
-                    <p>Progressive &amp; Science Based Programs</p>
-                  </div>
-                </div>
-
-                <div className="cert-item">
-                  <CheckCircle2 size={18} className="cert-check" />
-                  <div>
-                    <h4>Lifestyle &amp; Mindset Coaching</h4>
-                    <p>Building Healthy Habits for Long Term Results</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ========================================================
-          4. REAL CLIENTS. REAL PROGRESS. CAROUSEL SHOWCASE
-      ======================================================== */}
-      <section className="about-clients-progress-section">
+      <section className="about-certifications-section">
         <div className="container">
-          <div className="clients-progress-header">
+          <div className="cert-section-head">
             <div>
+              <span className="pill cert-pill">
+                <Award size={14} className="text-yellow" /> Professional Accreditations
+              </span>
               <h2 className="section-title">
-                Real Clients. <span className="text-blue">Real Progress.</span>
+                Certifications &amp; <span className="text-yellow">Specializations</span>
               </h2>
               <p className="section-sub">
-                Here are some of my clients who trusted the process and achieved life-changing results.
+                Verified certifications in sports sciences, personal training, and clinical diet planning.
               </p>
             </div>
-            <div className="progress-nav-arrows">
+
+            <div className="cert-slider-controls">
               <button
                 type="button"
-                className="arrow-btn"
-                onClick={prevTransform}
-                aria-label="Previous Transformation"
+                className="cert-nav-btn"
+                onClick={prevCert}
+                aria-label="Previous Certificate"
               >
                 <ChevronLeft size={18} />
               </button>
               <button
                 type="button"
-                className="arrow-btn"
-                onClick={nextTransform}
-                aria-label="Next Transformation"
+                className="cert-nav-btn"
+                onClick={nextCert}
+                aria-label="Next Certificate"
               >
                 <ChevronRight size={18} />
               </button>
             </div>
           </div>
 
-          {/* Cards Grid */}
-          <div className="progress-cards-grid">
-            {CLIENT_TRANSFORMS.map((client) => (
-              <article key={client.id} className="progress-card">
-                <div className="progress-card-img-wrap">
-                  <img src={client.img} alt={`${client.name} Transformation`} loading="lazy" />
-                </div>
-                <div className="progress-card-info">
-                  <h3 className="progress-client-name">{client.name}</h3>
-                  <p className="progress-client-sublabel">{client.sublabel}</p>
-                  <div className="progress-tags-row">
-                    <span className={client.tag1Type === 'loss' ? 'ptag-loss' : 'ptag-gain'}>
-                      {client.tag1}
-                    </span>
-                    <span className={client.tag2Type === 'gain' ? 'ptag-gain' : 'ptag-loss'}>
-                      {client.tag2}
-                    </span>
-                  </div>
-                </div>
-              </article>
-            ))}
+          {/* Certificate Slider Showcase */}
+          <div className="cert-slider-wrapper">
+            <div className="cert-cards-track">
+              {CERTIFICATES.map((cert, index) => {
+                const IconComp = cert.icon;
+                const isSelected = index === activeCert;
+                return (
+                  <article
+                    key={cert.id}
+                    className={`cert-slide-card ${isSelected ? 'active-cert' : ''}`}
+                    onClick={() => setActiveCert(index)}
+                  >
+                    <div className="cert-card-top">
+                      <div className="cert-badge-tag">
+                        <IconComp size={15} style={{ color: cert.accent }} />
+                        <span>{cert.badge}</span>
+                      </div>
+                      <span className="cert-accredited-pill">Verified</span>
+                    </div>
+
+                    <div className="cert-seal-box">
+                      <Award size={36} className="cert-gold-seal" />
+                      <div className="cert-seal-text">TRAINXSHIV CERTIFIED</div>
+                    </div>
+
+                    <h3 className="cert-card-title">{cert.title}</h3>
+                    <div className="cert-card-org">{cert.org}</div>
+                    <p className="cert-card-desc">{cert.desc}</p>
+
+                    <div className="cert-card-footer">
+                      <span className="cert-status-dot" />
+                      <span>Certified &amp; Active Practicing Coach</span>
+                    </div>
+                  </article>
+                );
+              })}
+            </div>
           </div>
         </div>
       </section>
 
       {/* ========================================================
-          5. OUR COACHING TEAM SECTION
+          4. "WATCH ALL TRANSFORMATIONS" BANNER
+          Replaces Real Clients. Real Progress. as requested
+      ======================================================== */}
+      <section className="about-all-transformations-banner">
+        <div className="container banner-inner-card">
+          <div className="banner-content">
+            <span className="banner-pill">
+              <Trophy size={13} className="text-yellow" /> 500+ Verified Natural Transformations
+            </span>
+            <h2 className="banner-title">
+              Real People. <span className="text-yellow">Real Results.</span>
+            </h2>
+            <p className="banner-desc">
+              Discover verified before-and-after transformations, client journeys, and natural fat loss stories
+              achieved with TrainXShiv coaching.
+            </p>
+          </div>
+
+          <div className="banner-action">
+            <Link to="/transformations" className="btn-watch-transformations">
+              <span>Watch All Transformations</span>
+              <ArrowRight size={16} />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ========================================================
+          5. OUR COACHING TEAM SECTION (KEPT INTACT)
       ======================================================== */}
       <section className="about-team-section">
         <div className="container">
           <div className="about-team-header">
             <h2 className="section-title">
-              Our Coaching <span className="text-blue">Team</span>
+              Our Coaching <span className="text-yellow">Team</span>
             </h2>
             <p className="section-sub">
-              Led by Shivan, our team of certified trainers work together to provide the best guidance in
-              training, nutrition and lifestyle transformation.
+              Led by Master Coach Shivan, our team of certified trainers work together to provide the best
+              guidance in training, nutrition and lifestyle transformation.
             </p>
           </div>
 
           <div className="about-team-grid">
-            {/* Featured Head Coach Card: Shivan */}
+            {/* Featured Master Coach: Shivan */}
             <article className="team-featured-card">
               <div className="team-featured-img-col">
                 <img
@@ -546,13 +441,13 @@ export default function Trainers() {
                 />
                 <div className="team-featured-badge">
                   <Crown size={13} />
-                  <span>Founder &amp; Head Coach</span>
+                  <span>Master Coach</span>
                 </div>
               </div>
 
               <div className="team-featured-body">
                 <h3 className="team-featured-name">{HEAD_TRAINER.name || 'Shivan'}</h3>
-                <div className="team-featured-role">Founder of TrainXShiv</div>
+                <div className="team-featured-role">Master Coach &bull; TrainXShiv</div>
                 <p className="team-featured-bio">
                   Helping people build a stronger, healthier and more confident version of themselves through
                   personalized coaching.
@@ -769,8 +664,8 @@ export default function Trainers() {
         <div className="container">
           <div className="coaching-results-header">
             <h2 className="section-title">
-              Why Our Coaching <span className="text-blue">Delivers</span> Unmatched{' '}
-              <span className="text-blue">Results</span>
+              Why Our Coaching <span className="text-yellow">Delivers</span> Unmatched{' '}
+              <span className="text-yellow">Results</span>
             </h2>
             <p className="section-sub">
               We don't sell shortcuts — we build real habits, real progress, and real life transformation.
@@ -780,7 +675,7 @@ export default function Trainers() {
           <div className="coaching-results-grid">
             <div className="coaching-feature-card">
               <div className="coaching-ico-box">
-                <Target size={22} className="text-blue" />
+                <Target size={22} className="text-yellow" />
               </div>
               <h3>100% Goal-Based Plans</h3>
               <p>Customized training and nutrition plans based on your body, lifestyle and goals.</p>
@@ -788,7 +683,7 @@ export default function Trainers() {
 
             <div className="coaching-feature-card">
               <div className="coaching-ico-box">
-                <ShieldCheck size={22} className="text-blue" />
+                <ShieldCheck size={22} className="text-yellow" />
               </div>
               <h3>Injury-Free Form Audits</h3>
               <p>Learn the right technique to train safely, avoid injuries and maximize results.</p>
@@ -796,7 +691,7 @@ export default function Trainers() {
 
             <div className="coaching-feature-card">
               <div className="coaching-ico-box">
-                <MessageSquare size={22} className="text-blue" />
+                <MessageSquare size={22} className="text-yellow" />
               </div>
               <h3>Direct Coach on WhatsApp</h3>
               <p>Get ongoing support, doubt solving and personal guidance directly from the coach.</p>
@@ -804,7 +699,7 @@ export default function Trainers() {
 
             <div className="coaching-feature-card">
               <div className="coaching-ico-box">
-                <BarChart3 size={22} className="text-blue" />
+                <BarChart3 size={22} className="text-yellow" />
               </div>
               <h3>Weekly Progress Adjustments</h3>
               <p>Your plan is updated regularly based on your progress, feedback and changing goals.</p>
@@ -834,7 +729,7 @@ export default function Trainers() {
             <div className="about-cta-actions">
               <button
                 type="button"
-                className="btn-cta-white"
+                className="btn-cta-gold"
                 onClick={() => open('enroll', { plan: 'Complete Transformation Coaching' })}
               >
                 <span>Start Your Transformation</span>
@@ -848,57 +743,21 @@ export default function Trainers() {
 
             <div className="about-cta-perks">
               <span>
-                <Check size={14} className="perk-check" /> Personalized Plans
+                <Check size={14} className="perk-check text-yellow" /> Personalized Plans
               </span>
               <span>
-                <Check size={14} className="perk-check" /> Expert Guidance
+                <Check size={14} className="perk-check text-yellow" /> Expert Guidance
               </span>
               <span>
-                <Check size={14} className="perk-check" /> Flexible Training
+                <Check size={14} className="perk-check text-yellow" /> Flexible Training
               </span>
               <span>
-                <Check size={14} className="perk-check" /> Ongoing Support
+                <Check size={14} className="perk-check text-yellow" /> Ongoing Support
               </span>
             </div>
           </div>
         </div>
       </section>
-
-      {/* ========================================================
-          VIDEO MODAL FOR FOUNDER STORY
-      ======================================================== */}
-      {videoModalOpen && (
-        <div
-          className="about-video-modal-backdrop"
-          onClick={() => setVideoModalOpen(false)}
-          role="dialog"
-          aria-modal="true"
-        >
-          <div
-            className="about-video-modal-content"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <button
-              type="button"
-              className="about-video-close-btn"
-              onClick={() => setVideoModalOpen(false)}
-              aria-label="Close Video"
-            >
-              <X size={20} />
-            </button>
-
-            <div className="about-video-player-wrap">
-              <video
-                src="/videos/our-story.mp4"
-                controls
-                autoPlay
-                playsInline
-                className="about-video-element"
-              />
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 }

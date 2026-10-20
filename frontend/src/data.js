@@ -35,12 +35,11 @@ export const NAV = [
   ['Diet Plans', '/diet-plans'],
   ['Contact', '/contact'],
 ];
+import initialData from './initialData.json';
 
-export const PROGRAMS = cms.programs || [
-  { id: 'online', cat: 'Online Coaching', icon: 'Laptop', title: 'Online Coaching', tag: 'Train from anywhere with expert 1-on-1 guidance and weekly check-ins.', weeks: 'Flexible', level: 'All Levels', img: '/images/online.jpg', from: 1999, features: ['Personalized workout & diet plan', 'Weekly check-ins & adjustments', 'Daily WhatsApp chat support', 'Video form correction'] },
-  { id: 'muscle', cat: 'Muscle Building', icon: 'Trophy', title: 'Muscle Building Program', tag: 'Build solid lean muscle, raw strength and aesthetic shape naturally.', weeks: '12+ Weeks', level: 'Beginner–Advanced', img: '/images/muscle.jpg', from: 2499, features: ['Hypertrophy progressive training', 'High-protein Indian meal plan', 'Form & biomechanics guidance', 'Strength milestone tracking'] },
-  { id: 'fat-loss', cat: 'Fat Loss', icon: 'Flame', title: 'Fat Loss Program', tag: 'Burn stubborn fat, get lean and build sustainable lifelong habits.', weeks: '8–24 Weeks', level: 'All Levels', img: '/images/fat-loss.jpg', from: 1999, features: ['Targeted fat-burn workout routine', 'Flexible Indian calorie-deficit diet', 'Weekly body recomposition checks', 'Metabolic recovery guidance'] },
-];
+export const PROGRAMS = cms.programs || initialData.programs;
+export const PACKAGES = PROGRAMS;
+
 
 export const PLANS = cms.plans || [
   { id: 'online', name: 'Online Coaching', price: 1999, duration: 'Flexible', workout: true, diet: true, support: 'Chat Support', tracking: true, icon: 'Laptop' },
@@ -58,9 +57,9 @@ export const PAID_DIETS = cms.paidDiets || [
 export const HEAD_TRAINER = cms.headTrainer || {
   id: 1,
   name: 'Shivam',
-  badge: 'HEAD TRAINER & FOUNDER',
-  role: 'HEAD TRAINER & FOUNDER',
-  tags: ['Head Coach', 'Founder', 'Master Trainer'],
+  badge: 'Master Coach',
+  role: 'Master Coach',
+  tags: ['Master Coach', 'Founder', 'Strength & Nutrition'],
   img: '/foundercoach/shivamsingh.png',
   featured: true,
   bio: 'Helping people build a stronger, healthier and more confident version of themselves.',
