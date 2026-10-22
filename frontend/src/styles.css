@@ -122,34 +122,28 @@ h1 em, h2 em, h3 em, h4 em, .text-blue, .text-yellow, .text-gold { color: #FFD70
   position: relative;
   aspect-ratio: 16 / 9;
   width: 100%;
-  overflow: visible;
+  overflow: hidden;
+  border-radius: 20px 20px 0 0;
+  background: #0f131a;
 }
 .pcard .media img, 
 .pcard .media .img-fallback {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 25%;
+  object-position: center center;
   border-radius: 0;
   display: block;
+  transition: transform 0.4s ease;
+}
+.pcard:hover .media img {
+  transform: scale(1.03);
 }
 .pcard .ico {
-  position: absolute;
-  left: 20px;
-  bottom: -22px;
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background: #fff;
-  color: var(--blue);
-  display: grid;
-  place-items: center;
-  box-shadow: 0 8px 24px rgba(18, 52, 140, .25);
-  z-index: 3;
+  display: none;
 }
 .pcard .card-body {
   padding: 20px;
-  padding-top: 30px;
 }
 
 /* Mobile view: Image remains 100% proper & full (16:9), card body is compactly proportioned */
@@ -6658,23 +6652,50 @@ body.on-text .cur-dot,body.on-text .cur-ring{opacity:0}
   position: relative;
   aspect-ratio: 16 / 9;
   width: 100%;
+  overflow: hidden;
+  border-radius: 20px 20px 0 0;
+  background: #0f131a;
 }
 
-.pcard-category-badge {
-  position: absolute;
-  top: 14px;
-  right: 14px;
-  background: rgba(17, 20, 27, 0.88);
-  backdrop-filter: blur(8px);
+.premium-pkg-card .media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.premium-pkg-card:hover .media img {
+  transform: scale(1.03);
+}
+
+.pcard-top-meta-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.pcard-cat-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 215, 0, 0.12);
   color: #FFD700;
-  border: 1px solid rgba(255, 215, 0, 0.3);
-  font-size: 0.75rem;
-  font-weight: 700;
+  border: 1px solid rgba(255, 215, 0, 0.35);
+  font-size: 0.74rem;
+  font-weight: 800;
   padding: 4px 10px;
   border-radius: 99px;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
-  z-index: 2;
+  letter-spacing: 0.04em;
+}
+
+.pcard-cat-badge svg {
+  color: #FFD700;
 }
 
 .premium-pkg-card .card-body {

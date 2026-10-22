@@ -154,20 +154,25 @@ export function ProgramCard({ p }) {
     <article className="card pcard premium-pkg-card">
       <div className="media">
         <Img src={p.img} alt={p.title} label={p.cat} />
-        <span className="ico"><Icon name={p.icon || 'Dumbbell'} size={22} /></span>
-        <span className="pcard-category-badge">{p.cat}</span>
       </div>
       <div className="card-body">
-        <div className="pcard-pricing-header">
-          <div className="pcard-price-group">
-            <span className="pcard-price-val">{priceDisplay}</span>
-            {periodDisplay && <span className="pcard-price-sub">{periodDisplay}</span>}
-          </div>
+        <div className="pcard-top-meta-row">
+          <span className="pcard-cat-badge">
+            <Icon name={p.icon || 'Dumbbell'} size={14} />
+            <span>{p.cat}</span>
+          </span>
           {p.validity && (
             <span className="pcard-validity-tag">
               {p.validity.split('.')[0]}
             </span>
           )}
+        </div>
+
+        <div className="pcard-pricing-header">
+          <div className="pcard-price-group">
+            <span className="pcard-price-val">{priceDisplay}</span>
+            {periodDisplay && <span className="pcard-price-sub">{periodDisplay}</span>}
+          </div>
         </div>
 
         <h3 className="pcard-title">{p.title}</h3>
