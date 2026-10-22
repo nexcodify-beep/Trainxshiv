@@ -33,7 +33,7 @@
       "title": "Offline Personal Training",
       "cat": "Personal Coaching",
       "icon": "Dumbbell",
-      "img": "/images/personal.jpg",
+      "img": "/images/offline-personal-training.jpg",
       "price": 20000,
       "priceFormatted": "₹20,000",
       "pricePeriod": "/month",
@@ -1140,9 +1140,9 @@
     {
       "id": 2,
       "category": "nutrition",
-      "title": "Diploma in Nutrition",
+      "title": "Diploma in 1-on-1 Nutrition",
       "org": "Fitness With Gomzi - International Institute of Teaching (FGIIT) & INPTA",
-      "badge": "2. Nutrition & Dietetics",
+      "badge": "2. 1-on-1 Nutrition",
       "year": "Accredited 2025",
       "img": "/images/certificate/nutrition.jpg",
       "desc": "Specialized in clinical macronutrient calculations, Indian diet planning, fat loss, muscle building, and metabolic health."

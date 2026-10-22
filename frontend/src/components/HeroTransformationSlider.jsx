@@ -105,7 +105,7 @@ export function HeroTransformationCard() {
 
       {/* Floating Trust Pill Below Card */}
       <div className="hero-transform-floating-badge">
-        <ShieldCheck size={16} className="text-blue" />
+        <ShieldCheck size={16} className="text-yellow" />
         <span>100% Real Client Transformations</span>
       </div>
     </div>

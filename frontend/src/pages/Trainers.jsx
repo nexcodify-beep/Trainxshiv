@@ -61,14 +61,14 @@ export default function Trainers() {
     {
       id: 2,
       category: 'nutrition',
-      title: 'Diploma in Nutrition',
+      title: 'Diploma in 1-on-1 Nutrition',
       org: 'Fitness With Gomzi - International Institute of Teaching (FGIIT) & INPTA',
-      badge: '2. Nutrition & Dietetics',
+      badge: '2. 1-on-1 Nutrition',
       year: 'Accredited 2025',
       img: '/images/certificate/nutrition.jpg',
       desc: 'Specialized in clinical macronutrient calculations, Indian diet planning, fat loss, muscle building, and metabolic health.',
       icon: Dumbbell,
-      accent: '#22C55E',
+      accent: '#FFD700',
     },
     {
       id: 3,
@@ -80,19 +80,19 @@ export default function Trainers() {
       img: '/images/certificate/injury.jpg',
       desc: 'Specialized in joint stabilization, pain-free movement patterns, corrective exercise rehab, and injury prevention.',
       icon: ShieldCheck,
-      accent: '#38BDF8',
+      accent: '#FFD700',
     },
     {
       id: 4,
       category: 'specialization',
       title: 'Powerlifting Coach Masterclass',
       org: 'Fitness With Gomzi - International Institute of Teaching (FGIIT) & INPTA',
-      badge: '4. Powerlifting & Strength',
+      badge: '4. Specialization & Strength',
       year: 'Accredited 2025',
       img: '/images/certificate/specialization.jpg',
       desc: 'Advanced programming for maximal strength, squat-bench-deadlift biomechanics, nervous system conditioning, and athletic performance.',
       icon: Flame,
-      accent: '#F97316',
+      accent: '#FFD700',
     },
   ];
 
@@ -109,73 +109,25 @@ export default function Trainers() {
   return (
     <div className="about-trainer-page">
       {/* ========================================================
-          1. HERO SECTION: MEET SHIVAN — MASTER COACH
+          1. HERO SECTION: MEET SHIVAM — MASTER COACH
       ======================================================== */}
       <section className="about-trainer-hero">
-        <div className="container about-hero-container">
-          {/* Left Column: Introduction & Story */}
-          <div className="about-hero-copy">
+        <div className="container about-hero-stacked">
+          {/* Top: Meet Shivam Heading */}
+          <div className="about-hero-header">
             <div className="about-hero-badge">
               <Crown size={14} className="text-yellow" />
               <span>Master Coach</span>
             </div>
 
             <h1 className="about-hero-title">
-              Meet <span className="text-yellow">Shivan</span> — Master Coach Behind{' '}
+              Meet <span className="text-yellow">Shivam</span> — Master Coach Behind{' '}
               <span className="text-yellow">TrainXShiv</span>
             </h1>
-
-            <p className="about-hero-desc">
-              Hi, I'm Shivan, a certified fitness coach and founder of TrainXShiv. From struggling with gains, to
-              transforming into a stronger, leaner, and healthier version of myself — my mission is to help people
-              build a stronger and more confident version of themselves through science-based training, sustainable
-              nutrition and disciplined mindset coaching.
-            </p>
-
-            <div className="about-hero-highlights">
-              <div className="about-hl-item">
-                <CheckCircle2 size={16} className="text-yellow" />
-                <span>ISSA Certified Fitness &amp; Sports Nutritionist</span>
-              </div>
-              <div className="about-hl-item">
-                <CheckCircle2 size={16} className="text-yellow" />
-                <span>7+ Years Experience &bull; 100% Natural Transformation</span>
-              </div>
-              <div className="about-hl-item">
-                <CheckCircle2 size={16} className="text-yellow" />
-                <span>500+ Successful Transformations Guided</span>
-              </div>
-            </div>
-
-            {/* Social Proof Stack */}
-            <div className="about-hero-social-proof">
-              <div className="avatar-stack">
-                <img
-                  src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop"
-                  alt="client"
-                />
-                <img
-                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop"
-                  alt="client"
-                />
-                <img
-                  src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop"
-                  alt="client"
-                />
-                <img
-                  src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop"
-                  alt="client"
-                />
-              </div>
-              <div className="proof-text">
-                <strong>500+ Happy Clients</strong>
-                <span>100% Verified Transformations</span>
-              </div>
-            </div>
           </div>
 
-          {/* Right Column: Transformation Visual & Action Buttons Underneath */}
-          <div className="about-hero-visual-col">
+          {/* Directly Below Heading: Shivam's Before & After Transformation Visual */}
+          <div className="about-hero-visual-wrapper">
             <div className="about-hero-visual">
               {/* Before Card */}
               <div className="hero-ba-card before-card">
@@ -183,7 +135,7 @@ export default function Trainers() {
                 <div className="ba-img-wrap">
                   <img
                     src="/images/trainers/shivan_before.jpg"
-                    alt="Shivan Before Transformation"
+                    alt="Shivam Before Transformation"
                     loading="eager"
                   />
                 </div>
@@ -214,7 +166,7 @@ export default function Trainers() {
                 <div className="ba-img-wrap">
                   <img
                     src="/images/trainers/shivan_after.jpg"
-                    alt="Shivan After Transformation"
+                    alt="Shivam After Transformation"
                     loading="eager"
                   />
                 </div>
@@ -234,30 +186,67 @@ export default function Trainers() {
                 </div>
               </div>
             </div>
+          </div>
 
-            {/* ACTION BUTTONS: Directly under the photo as requested */}
-            <div className="about-photo-actions">
-              <button
-                type="button"
-                className="btn-about-primary"
-                onClick={() => open('enroll', { plan: '1-on-1 Consultation with Master Coach Shivan' })}
-              >
-                <span>Book 1-on-1 Consultation</span>
-                <ArrowRight size={16} />
-              </button>
+          {/* Directly Below Visual: "Hi, I'm Shivam..." Story and Action CTA */}
+          <div className="about-hero-story-card">
+            <p className="about-hero-desc">
+              Hi, I'm Shivam, a certified fitness coach and founder of TrainXShiv. From struggling with gains, to
+              transforming into a stronger, leaner, and healthier version of myself — my mission is to help people
+              build a stronger and more confident version of themselves through science-based training, sustainable
+              nutrition and disciplined mindset coaching.
+            </p>
 
-              <a
-                href={BRAND.instagram || 'https://www.instagram.com/trainxshiv/'}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-about-watch"
-              >
-                <div className="watch-play-circle">
-                  <Play size={12} fill="#FFD700" className="text-yellow" />
+            {/* Actions & Proof Row */}
+            <div className="about-hero-actions-row">
+              <div className="about-hero-social-proof">
+                <div className="avatar-stack">
+                  <img
+                    src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop"
+                    alt="client"
+                  />
+                  <img
+                    src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop"
+                    alt="client"
+                  />
+                  <img
+                    src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop"
+                    alt="client"
+                  />
+                  <img
+                    src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop"
+                    alt="client"
+                  />
                 </div>
-                <span>Watch My Story</span>
-                <ExternalLink size={13} className="ext-icon" />
-              </a>
+                <div className="proof-text">
+                  <strong>500+ Happy Clients</strong>
+                  <span>100% Verified Transformations</span>
+                </div>
+              </div>
+
+              <div className="about-photo-actions">
+                <button
+                  type="button"
+                  className="btn-about-primary"
+                  onClick={() => open('enroll', { plan: '1-on-1 Consultation with Master Coach Shivam' })}
+                >
+                  <span>Book 1-on-1 Consultation</span>
+                  <ArrowRight size={16} />
+                </button>
+
+                <a
+                  href={BRAND.instagram || 'https://www.instagram.com/trainxshiv/'}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-about-watch"
+                >
+                  <div className="watch-play-circle">
+                    <Play size={12} fill="#FFD700" className="text-yellow" />
+                  </div>
+                  <span>Watch My Story</span>
+                  <ExternalLink size={13} className="ext-icon" />
+                </a>
+              </div>
             </div>
           </div>
         </div>
@@ -328,7 +317,7 @@ export default function Trainers() {
                 <Award size={14} className="text-yellow" /> Professional Accreditations
               </span>
               <h2 className="section-title">
-                Certifications &amp; <span className="text-yellow">Specializations</span>
+                <span className="text-yellow">Specializations</span> &amp; Certifications
               </h2>
               <p className="section-sub">
                 Verified certifications in sports sciences, personal training, and clinical diet planning.
@@ -463,18 +452,18 @@ export default function Trainers() {
               Our Coaching <span className="text-yellow">Team</span>
             </h2>
             <p className="section-sub">
-              Led by Master Coach Shivan, our team of certified trainers work together to provide the best
+              Led by Master Coach Shivam, our team of certified trainers work together to provide the best
               guidance in training, nutrition and lifestyle transformation.
             </p>
           </div>
 
           <div className="about-team-grid">
-            {/* Featured Master Coach: Shivan */}
+            {/* Featured Master Coach: Shivam */}
             <article className="team-featured-card">
               <div className="team-featured-img-col">
                 <img
                   src={HEAD_TRAINER.img || '/foundercoach/shivamsingh.png'}
-                  alt={HEAD_TRAINER.name || 'Shivan'}
+                  alt={HEAD_TRAINER.name || 'Shivam'}
                 />
                 <div className="team-featured-badge">
                   <Crown size={13} />
@@ -483,7 +472,7 @@ export default function Trainers() {
               </div>
 
               <div className="team-featured-body">
-                <h3 className="team-featured-name">{HEAD_TRAINER.name || 'Shivan'}</h3>
+                <h3 className="team-featured-name">{HEAD_TRAINER.name || 'Shivam'}</h3>
                 <div className="team-featured-role">Master Coach &bull; TrainXShiv</div>
                 <p className="team-featured-bio">
                   Helping people build a stronger, healthier and more confident version of themselves through
@@ -521,7 +510,7 @@ export default function Trainers() {
                 <button
                   type="button"
                   className="btn-featured-consult"
-                  onClick={() => open('enroll', { plan: `Coaching with ${HEAD_TRAINER.name || 'Shivan'}` })}
+                  onClick={() => open('enroll', { plan: `Coaching with ${HEAD_TRAINER.name || 'Shivam'}` })}
                 >
                   <span>Book a Consultation</span>
                   <ArrowRight size={14} />
@@ -835,7 +824,7 @@ export default function Trainers() {
               <p className="cert-lh-desc">{selectedCertModal.desc}</p>
               <div className="cert-lh-verified-tag">
                 <ShieldCheck size={16} className="text-yellow" />
-                <span>Verified Active Credential &bull; Master Coach Shivan Singh</span>
+                <span>Verified Active Credential &bull; Master Coach Shivam Singh</span>
               </div>
             </div>
           </div>

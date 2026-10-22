@@ -22,7 +22,13 @@ export async function fetchContent() {
   const local = localStorage.getItem(STORAGE_KEY);
   if (local) {
     try {
-      return { data: JSON.parse(local), source: 'local' };
+      const parsed = JSON.parse(local);
+      const ptProg = parsed.programs?.find(p => p.id === 'offline-pt');
+      if (ptProg && (!ptProg.img || ptProg.img.includes('personal.jpg') || ptProg.img.includes('shivamsingh.png'))) {
+        ptProg.img = '/images/offline-personal-training.jpg';
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(parsed));
+      }
+      return { data: parsed, source: 'local' };
     } catch (e) {
       // corrupt, fallback to initial
     }

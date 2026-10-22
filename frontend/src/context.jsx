@@ -45,7 +45,12 @@ export function ContentProvider({ children }) {
           if (groupCoaching && (!groupCoaching.img || groupCoaching.img === '')) {
             groupCoaching.img = '/images/group.jpg';
           }
-          if (!parsed.certificates || parsed.certificates.length < 4 || parsed.certificates.some(c => c.img && c.img.endsWith('.svg'))) {
+          // Ensure offline personal training has new image
+          const offlinePt = parsed.programs?.find(p => p.id === 'offline-pt');
+          if (offlinePt && (!offlinePt.img || offlinePt.img.includes('personal.jpg') || offlinePt.img.includes('shivamsingh.png'))) {
+            offlinePt.img = '/images/offline-personal-training.jpg';
+          }
+          if (!parsed.certificates || parsed.certificates.length < 4 || parsed.certificates.some(c => c.img && c.img.endsWith('.svg')) || parsed.certificates.some(c => c.category === 'nutrition' && c.badge !== '2. 1-on-1 Nutrition')) {
             parsed.certificates = initialData.certificates;
           }
           localStorage.setItem(STORAGE_KEY, JSON.stringify(parsed));
@@ -75,7 +80,11 @@ export function ContentProvider({ children }) {
         if (groupCoaching && (!groupCoaching.img || groupCoaching.img === '')) {
           groupCoaching.img = '/images/group.jpg';
         }
-        if (!parsed.certificates || parsed.certificates.length < 4 || parsed.certificates.some(c => c.img && c.img.endsWith('.svg'))) {
+        const offlinePt = parsed.programs?.find(p => p.id === 'offline-pt');
+        if (offlinePt && (!offlinePt.img || offlinePt.img.includes('personal.jpg') || offlinePt.img.includes('shivamsingh.png'))) {
+          offlinePt.img = '/images/offline-personal-training.jpg';
+        }
+        if (!parsed.certificates || parsed.certificates.length < 4 || parsed.certificates.some(c => c.img && c.img.endsWith('.svg')) || parsed.certificates.some(c => c.category === 'nutrition' && c.badge !== '2. 1-on-1 Nutrition')) {
           parsed.certificates = initialData.certificates;
         }
         localStorage.setItem(STORAGE_KEY, JSON.stringify(parsed));

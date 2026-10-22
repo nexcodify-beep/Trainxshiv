@@ -18,7 +18,7 @@ const CRITICAL_ASSETS = [
   '/images/muscle.jpg',
   '/images/weight-gain.jpg',
   '/images/toning.jpg',
-  '/images/personal.jpg',
+  '/images/offline-personal-training.jpg',
   '/images/online.jpg',
   '/images/nutrition.jpg',
   '/images/diet.jpg',

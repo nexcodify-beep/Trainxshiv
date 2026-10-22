@@ -5,7 +5,13 @@ function getCmsData() {
     try {
       const stored = localStorage.getItem('trainxshiv_cms_data');
       if (stored) {
-        return JSON.parse(stored);
+        const parsed = JSON.parse(stored);
+        const pt = parsed?.programs?.find(p => p.id === 'offline-pt');
+        if (pt && (!pt.img || pt.img.includes('personal.jpg') || pt.img.includes('shivamsingh.png'))) {
+          pt.img = '/images/offline-personal-training.jpg';
+          localStorage.setItem('trainxshiv_cms_data', JSON.stringify(parsed));
+        }
+        return parsed;
       }
     } catch (e) {
       console.warn('Failed to parse cached CMS data:', e);
