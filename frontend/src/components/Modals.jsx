@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { X, CheckCircle2, Check, Send, Clock, BarChart3, VideoOff, Target, AlertCircle } from 'lucide-react';
+import { X, CheckCircle2, Check, Send, Clock, BarChart3, VideoOff, Target, AlertCircle, Sparkles } from 'lucide-react';
 import { useModal, useContent } from '../context';
 import { BRAND, PROGRAMS, PLANS, BLOG } from '../data';
 import { Icon, Img, inr, waLink } from './ui';
@@ -42,19 +42,19 @@ function Enroll({ data, close }) {
   };
   if (sent)
     return (
-      <div className="m-body center">
-        <div className="success"><CheckCircle2 size={56} /></div>
+      <div className="m-body center consultation-success">
+        <div className="success"><CheckCircle2 size={56} className="text-yellow" /></div>
         <h3>You're one step closer!</h3>
-        <p className="muted">WhatsApp opened with your details. Send the message and our coach will reply shortly. If it did not open, call {BRAND.phone}.</p>
+        <p className="muted">WhatsApp opened with your details. Send the message and Coach Shivam will reply shortly. If it did not open, call {BRAND.phone}.</p>
         <button className="btn btn-primary" onClick={close}>Done</button>
       </div>
     );
   return (
-    <div className="m-body">
-      <span className="pill">Free consultation</span>
-      <h3>Start Your Transformation</h3>
-      <p className="muted">Tell us your goal. A coach will reach out on WhatsApp.</p>
-      <form className="form" onSubmit={submit}>
+    <div className="m-body consultation-modal-body">
+      <span className="pill pill-gold"><Sparkles size={13} className="text-yellow" /> Free Consultation</span>
+      <h3 className="consultation-title">Start Your Transformation</h3>
+      <p className="consultation-sub">Tell us your goal. Coach Shivam will reach out directly on WhatsApp.</p>
+      <form className="form consultation-form" onSubmit={submit}>
         <div className="grid g2">
           <label>Full name<input type="text" value={f.name} onChange={set('name')} placeholder="Your name" autoFocus /></label>
           <label>Mobile number<input type="tel" value={f.phone} onChange={set('phone')} placeholder="98XXXXXXXX" /></label>
@@ -65,16 +65,16 @@ function Enroll({ data, close }) {
           </label>
           <label>Plan / program
             <select value={f.plan} onChange={set('plan')}>
-              <option value="">Not sure yet</option>
+              <option value="">Not sure yet (Guidance needed)</option>
               {PLANS.map((p) => <option key={p.id} value={p.name}>{p.name} ({inr(p.price)})</option>)}
               {PROGRAMS.map((p) => <option key={p.id} value={p.title}>{p.title}</option>)}
               {f.plan && !PLANS.some((p) => p.name === f.plan) && !PROGRAMS.some((p) => p.title === f.plan) && <option value={f.plan}>{f.plan}</option>}
             </select>
           </label>
         </div>
-        <label>Anything we should know? (optional)<textarea rows="3" value={f.note} onChange={set('note')} placeholder="Injuries, food preference, timing…" /></label>
-        {err && <p className="err" role="alert">{err}</p>}
-        <button className="btn btn-primary btn-lg" type="submit"><Send size={18} /> Send on WhatsApp</button>
+        <label>Anything we should know? (optional)<textarea rows="3" value={f.note} onChange={set('note')} placeholder="Injuries, food preference, preferred workout timing…" /></label>
+        {err && <p className="err-gold" role="alert">{err}</p>}
+        <button className="btn btn-primary btn-lg consultation-submit-btn" type="submit"><Send size={18} /> Connect with Coach on WhatsApp</button>
       </form>
     </div>
   );

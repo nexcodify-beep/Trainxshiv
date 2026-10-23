@@ -20,7 +20,7 @@ export default function DietPlans() {
       weeks: '4 Weeks',
       popular: false,
       tagline: 'Ideal for Beginners Starting Their Journey',
-      specialties: '100% Ghar Ka Khana &bull; Simple Indian Meal Swaps',
+      specialties: '100% Home Food Diet &bull; Simple Indian Meal Swaps',
       items: [
         'Custom calorie & macro targets tailored to your metabolic rate',
         'Vegetarian & non-vegetarian flexible Indian meal plan',
@@ -74,7 +74,7 @@ export default function DietPlans() {
             Custom Diet Plans <span className="text-yellow">Built For You</span>
           </h1>
           <p>
-            No boring boiled chicken or bland salads. 100% ghar ka khana tailored to your body, routine and
+            No boring boiled chicken or bland salads. 100% home food diet tailored to your body, routine and
             taste.
           </p>
         </div>
@@ -152,7 +152,7 @@ export default function DietPlans() {
               </p>
               <ul className="ticks light">
                 <li>
-                  <Check size={15} /> 100% Ghar Ka Khana (Roti, Dal, Rice, Paneer/Chicken)
+                  <Check size={15} /> 100% Home Food Diet (Roti, Dal, Rice, Paneer/Chicken)
                 </li>
                 <li>
                   <Check size={15} /> Veg &amp; Non-Veg Options

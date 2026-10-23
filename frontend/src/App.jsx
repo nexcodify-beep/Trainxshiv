@@ -13,6 +13,7 @@ import Trainers from './pages/Trainers';
 import Transformations from './pages/Transformations';
 import DietPlans from './pages/DietPlans';
 import Contact from './pages/Contact';
+import DifferenceDetail from './pages/DifferenceDetail';
 import { Legal, NotFound } from './pages/Misc';
 
 import { BRAND } from './data';
@@ -138,6 +139,8 @@ export default function App() {
           <Route path="/pricing" element={<Navigate to="/programs" replace />} />
           <Route path="/blog" element={<Navigate to="/" replace />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/difference/:slug" element={<DifferenceDetail />} />
+          <Route path="/difference" element={<DifferenceDetail />} />
           <Route path="/privacy" element={<Legal />} />
           <Route path="/terms" element={<Legal />} />
           <Route path="*" element={<NotFound />} />
