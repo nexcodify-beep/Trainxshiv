@@ -158,6 +158,9 @@ export default function DietPlans() {
                   <Check size={15} /> Veg &amp; Non-Veg Options
                 </li>
                 <li>
+                  <Check size={15} /> Exact Portion Sizes for Your Target Calories
+                </li>
+                <li>
                   <Check size={15} /> Delivered via WhatsApp by Master Coach Shivam
                 </li>
               </ul>

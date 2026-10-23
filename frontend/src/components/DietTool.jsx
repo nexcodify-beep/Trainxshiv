@@ -14,7 +14,6 @@ import {
   UtensilsCrossed, 
   Droplet 
 } from 'lucide-react';
-import { useModal } from '../context';
 
 const ACT = { sedentary: 1.2, light: 1.375, moderate: 1.55, active: 1.725 };
 
@@ -34,7 +33,6 @@ function calc(f) {
 // Generates basic Indian daily meals based on diet preference and goal
 function getBasicMealPlan(f, res) {
   const isVeg = f.food === 'veg';
-  const goal = f.goal;
 
   if (isVeg) {
     return [
@@ -140,7 +138,6 @@ function getBasicMealPlan(f, res) {
 }
 
 export default function DietTool({ compact }) {
-  const { open } = useModal();
   const [f, setF] = useState({
     gender: 'male',
     age: '',
@@ -149,19 +146,45 @@ export default function DietTool({ compact }) {
     activity: 'moderate',
     goal: 'fat',
     food: 'veg',
+    hasDisease: false,
+    diseaseDetails: '',
   });
   const [res, setRes] = useState(null);
   const [err, setErr] = useState('');
   const [copied, setCopied] = useState(false);
   const set = (k) => (e) => setF({ ...f, [k]: e.target.value });
 
+  const getWaLink = (calculated) => {
+    if (!calculated) return '';
+    const goalsMap = {
+      fat: 'Fat Loss & Toning',
+      muscle: 'Lean Muscle Building',
+      gain: 'Weight Gain',
+      fit: 'Healthy Maintenance',
+    };
+    const diseaseText = f.hasDisease
+      ? `Yes (${f.diseaseDetails?.trim() || 'Medical issue mentioned'})`
+      : 'No (None / Healthy)';
+
+    const msg = `Hi Shivam! I generated my diet plan target on TrainXShiv:\n- Goal: ${goalsMap[f.goal] || f.goal}\n- Target Calories: ${calculated.kcal} kcal\n- Protein: ${calculated.protein}g | Carbs: ${calculated.carbs}g | Fat: ${calculated.fat}g\n- Weight: ${f.weight} kg, Height: ${f.height} cm\n- Food: ${f.food === 'veg' ? 'Vegetarian' : 'Non-Vegetarian'}\n- Medical Condition / Disease: ${diseaseText}\n\nI want to complete the ₹99 payment to get my full personalized diet plan.`;
+    return `https://wa.me/917080263878?text=${encodeURIComponent(msg)}`;
+  };
+
   const submit = (e) => {
     e.preventDefault();
     if (!(f.age >= 14 && f.age <= 80)) return setErr('Enter an age between 14 and 80.');
     if (!(f.height >= 120 && f.height <= 230)) return setErr('Enter height in cm (120 to 230).');
     if (!(f.weight >= 30 && f.weight <= 250)) return setErr('Enter weight in kg (30 to 250).');
+    if (f.hasDisease && !f.diseaseDetails?.trim()) {
+      return setErr('Please specify your medical condition or select "No".');
+    }
     setErr('');
-    setRes(calc(f));
+    const calculated = calc(f);
+    setRes(calculated);
+
+    // After generating, direct redirect straight to WhatsApp with the free plan details!
+    const waUrl = getWaLink(calculated);
+    window.open(waUrl, '_blank');
   };
 
   const handleCopyPlan = (mealPlan) => {
@@ -186,9 +209,7 @@ export default function DietTool({ compact }) {
   if (res) {
     const tot = res.protein * 4 + res.carbs * 4 + res.fat * 9;
     const mealPlan = getBasicMealPlan(f, res);
-    const waLinkText = `https://wa.me/917080263878?text=${encodeURIComponent(
-      `Hi Shivam! I generated my free diet plan on TrainXShiv:\n- Goal: ${f.goal}\n- Target Calories: ${res.kcal} kcal\n- Protein: ${res.protein}g | Carbs: ${res.carbs}g | Fat: ${res.fat}g\n- Food: ${f.food} | Weight: ${f.weight}kg\n\nI want to discuss my 1-on-1 personalized coaching!`
-    )}`;
+    const waUrl = getWaLink(res);
 
     return (
       <div className="dt-res">
@@ -227,6 +248,8 @@ export default function DietTool({ compact }) {
               <span>Maintenance: <strong>&asymp; {res.tdee} kcal</strong></span>
               <span>&bull;</span>
               <span>Water: <strong>3.5 - 4L/day</strong></span>
+              <span>&bull;</span>
+              <span>Medical: <strong>{f.hasDisease ? (f.diseaseDetails || 'Yes') : 'None (Healthy)'}</strong></span>
             </div>
           </div>
         </div>
@@ -276,27 +299,48 @@ export default function DietTool({ compact }) {
           </div>
         </div>
 
-        {/* 1-on-1 Custom Plan Coaching Upgrade CTA */}
+        {/* ₹99 WhatsApp Payment & Delivery Box */}
         <div className="dt-payment-box">
           <div className="dt-payment-header">
-            <div className="dt-price-badge">1-ON-1 COACHING</div>
-            <h4>Want 100% Exact Kitchen Grams &amp; Weekly WhatsApp Tracking?</h4>
+            <div className="dt-price-badge">₹99 ONLY</div>
+            <h4>Get Your Complete Custom Indian Diet Plan</h4>
           </div>
           <p className="dt-payment-desc">
-            This basic plan gives you general guidelines. For guaranteed results, Master Coach Shivam calculates
-            exact gram portions, customizes recipes around what your family cooks, and monitors your progress weekly.
+            Your customized meal chart with exact grams, home food swaps, grocery list &amp; portion
+            guidance will be delivered to you on WhatsApp after completing the ₹99 payment.
           </p>
+          <ul className="dt-payment-perks">
+            <li>
+              <CheckCircle2 size={15} className="text-yellow" />
+              <span>Personalized {f.food === 'veg' ? 'Vegetarian' : 'Non-Vegetarian'} Home Meals</span>
+            </li>
+            <li>
+              <CheckCircle2 size={15} className="text-yellow" />
+              <span>Exact portion sizes tailored to your {res.kcal} kcal target</span>
+            </li>
+            {f.hasDisease && f.diseaseDetails && (
+              <li>
+                <CheckCircle2 size={15} className="text-yellow" />
+                <span>Special nutrition adjustments for: <strong>{f.diseaseDetails}</strong></span>
+              </li>
+            )}
+            <li>
+              <CheckCircle2 size={15} className="text-yellow" />
+              <span>Direct WhatsApp delivery by Master Coach Shivam</span>
+            </li>
+          </ul>
 
           <div className="dt-payment-actions">
             <a
-              href={waLinkText}
+              href={waUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="btn btn-primary dt-pay-btn"
             >
-              <MessageCircle size={18} />
-              <span>Discuss Custom Plan with Shivam</span>
-              <ArrowRight size={16} />
+              <MessageCircle size={19} />
+              <span>Get Full Diet Chart on WhatsApp</span>
+              <span className="dt-btn-price-pill">₹99</span>
+              <ArrowRight size={17} />
             </a>
 
             <button type="button" className="btn btn-ghost btn-sm" onClick={() => setRes(null)}>
@@ -397,12 +441,53 @@ export default function DietTool({ compact }) {
         </label>
       </div>
 
+      {/* Medical Condition: Yes / No Switcher */}
+      <div className="dt-disease-toggle-section">
+        <div className="dt-disease-toggle-header">
+          <span className="dt-disease-toggle-title">Do you have any medical condition or health issue?</span>
+          <div className="dt-yn-toggle-group">
+            <button
+              type="button"
+              className={`dt-yn-btn ${!f.hasDisease ? 'active' : ''}`}
+              onClick={() => setF({ ...f, hasDisease: false, diseaseDetails: '' })}
+            >
+              No
+            </button>
+            <button
+              type="button"
+              className={`dt-yn-btn ${f.hasDisease ? 'active' : ''}`}
+              onClick={() => setF({ ...f, hasDisease: true })}
+            >
+              Yes
+            </button>
+          </div>
+        </div>
+
+        {f.hasDisease && (
+          <div className="dt-disease-input-wrapper">
+            <input
+              type="text"
+              className="dt-disease-custom-input"
+              placeholder="Enter your condition (e.g. Thyroid, PCOD, Diabetes, High BP, Uric Acid, etc.)"
+              value={f.diseaseDetails}
+              onChange={(e) => setF({ ...f, diseaseDetails: e.target.value })}
+              autoFocus
+              required
+            />
+            <small className="dt-disease-hint">
+              Coach Shivam will calibrate your personalized meal plan specifically for your health condition.
+            </small>
+          </div>
+        )}
+      </div>
+
       {err && <div className="err">{err}</div>}
 
       <button type="submit" className="btn btn-primary full dt-submit-btn">
-        <Calculator size={18} />
-        <span>Generate Free Diet Plan</span>
-        <ArrowRight size={16} />
+        <Calculator size={19} />
+        <span className="dt-submit-text">Get Customized Diet Plan</span>
+        <span className="dt-btn-price-pill">₹99 ONLY</span>
+        <ArrowRight size={17} />
       </button>
     </form>
   );

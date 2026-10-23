@@ -25,9 +25,9 @@ export default function Home() {
       <section className="section home-free-tools-section" id="free-tools">
         <div className="container">
           <SectionHead
-            eyebrow="100% Free Tools"
+            eyebrow="Personalized Fitness Tools"
             title="Instant Fitness Plan Generators"
-            sub="Generate your personalized Indian diet plan target or customized workout split routine in seconds — completely free."
+            sub="Generate your personalized Indian diet plan (₹99) or customized workout split routine in seconds."
           />
 
           {/* Interactive Tool Switcher Tabs - One Horizontal Line with Moving Arrow */}
@@ -38,8 +38,8 @@ export default function Home() {
               onClick={() => setActiveToolTab('diet')}
             >
               <Utensils size={17} className="tab-tool-icon" />
-              <span className="tab-label-desktop">Free Diet Plan Generator</span>
-              <span className="tab-label-mobile">Diet Generator</span>
+              <span className="tab-label-desktop">Personalized Diet Plan (₹99)</span>
+              <span className="tab-label-mobile">Diet Plan (₹99)</span>
               {activeToolTab === 'diet' && (
                 <ArrowRight size={16} className="tab-animated-arrow" />
               )}
@@ -65,12 +65,11 @@ export default function Home() {
               <div className="tool-tab-content">
                 <div className="tool-tab-intro">
                   <span className="pill pill-gold">
-                    <Sparkles size={12} className="text-yellow" /> Home-Cooked Nutrition Focus
+                    <Sparkles size={12} className="text-yellow" /> Personalized Indian Diet Plan &bull; ₹99
                   </span>
                   <h3>Calculate Your Calories, Macros &amp; Daily Meal Chart</h3>
                   <p>
-                    Enter your age, height, weight and food preference to instantly receive your target calories and
-                    a structured daily Indian meal plan.
+                    Enter your age, height, weight, food preference, and health condition to get your custom diet chart delivered on WhatsApp.
                   </p>
                 </div>
                 <DietTool compact={false} />

@@ -55,11 +55,11 @@ function Enroll({ data, close }) {
       <h3 className="consultation-title">Start Your Transformation</h3>
       <p className="consultation-sub">Tell us your goal. Coach Shivam will reach out directly on WhatsApp.</p>
       <form className="form consultation-form" onSubmit={submit}>
-        <div className="grid g2">
-          <label>Full name<input type="text" value={f.name} onChange={set('name')} placeholder="Your name" autoFocus /></label>
+        <div className="grid g2 consultation-grid-row">
+          <label>Full name<input type="text" value={f.name} onChange={set('name')} placeholder="Your name" /></label>
           <label>Mobile number<input type="tel" value={f.phone} onChange={set('phone')} placeholder="98XXXXXXXX" /></label>
         </div>
-        <div className="grid g2">
+        <div className="grid g2 consultation-grid-row">
           <label>Your goal
             <select value={f.goal} onChange={set('goal')}>{Object.entries(goals).map(([k, v]) => <option key={k} value={k}>{v}</option>)}</select>
           </label>
@@ -72,7 +72,7 @@ function Enroll({ data, close }) {
             </select>
           </label>
         </div>
-        <label>Anything we should know? (optional)<textarea rows="3" value={f.note} onChange={set('note')} placeholder="Injuries, food preference, preferred workout timing…" /></label>
+        <label>Anything we should know? (optional)<textarea rows="2" value={f.note} onChange={set('note')} placeholder="Injuries, food preference, preferred workout timing…" /></label>
         {err && <p className="err-gold" role="alert">{err}</p>}
         <button className="btn btn-primary btn-lg consultation-submit-btn" type="submit"><Send size={18} /> Connect with Coach on WhatsApp</button>
       </form>
@@ -265,8 +265,8 @@ export default function Modals() {
   if (type === 'blog') return <Shell onClose={close} wide label="Article"><Blog data={data} open={open} /></Shell>;
   if (type === 'freediet')
     return (
-      <Shell onClose={close} wide label="Free diet plan">
-        <div className="m-body"><span className="pill">100% free</span><h3>Free Diet Plan Generator</h3><p className="muted">Get your daily calories, macros and a sample Indian meal plan in seconds.</p><DietTool compact /></div>
+      <Shell onClose={close} wide label="Diet Plan">
+        <div className="m-body"><span className="pill pill-gold">Personalized Plan &bull; ₹99</span><h3>Indian Diet Plan Generator</h3><p className="muted">Get your daily calories, macros and full personalized meal plan on WhatsApp.</p><DietTool compact /></div>
       </Shell>
     );
   return <Shell onClose={close} label="Enroll"><Enroll data={data} close={close} /></Shell>;
